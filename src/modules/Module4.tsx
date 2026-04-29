@@ -290,31 +290,31 @@ LIN P5`}</pre>
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="130" y="40" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--accent)">
+            <text x="130" y="40" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               demo.src
             </text>
-            <text x="35" y="62" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="62" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               DEF demo()
             </text>
-            <text x="35" y="80" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="80" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  INI'}
             </text>
-            <text x="35" y="98" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="98" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  PTP HOME'}
             </text>
-            <text x="35" y="116" fontSize="10" fontFamily="monospace" fill="var(--accent)" fontWeight="600">
+            <text x="35" y="116" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fontWeight="700">
               {'  PTP P1'}
             </text>
-            <text x="35" y="134" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="134" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  LIN P2'}
             </text>
-            <text x="35" y="152" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="152" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  PTP HOME'}
             </text>
-            <text x="35" y="170" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="170" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               END
             </text>
-            <text x="35" y="190" fontSize="9" fill="var(--muted)" fontStyle="italic">
+            <text x="35" y="190" fontSize="9" fill="var(--foreground)" fillOpacity="0.6" fontStyle="italic">
               логика, команды
             </text>
 
@@ -329,7 +329,8 @@ LIN P5`}</pre>
               strokeDasharray="4 3"
               markerEnd="url(#arrow4)"
             />
-            <text x="200" y="106" textAnchor="middle" fontSize="9" fill="var(--accent)">
+            <rect x="160" y="96" width="80" height="14" rx="3" fill="var(--background)" stroke="var(--accent)" strokeOpacity="0.4" strokeWidth="0.8" />
+            <text x="200" y="106" textAnchor="middle" fontSize="9" fontWeight="600" fill="var(--accent)">
               координаты P1
             </text>
 
@@ -344,34 +345,34 @@ LIN P5`}</pre>
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="410" y="40" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--accent)">
+            <text x="410" y="40" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               demo.dat
             </text>
-            <text x="315" y="62" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="62" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               DEFDAT demo
             </text>
-            <text x="315" y="86" fontSize="9" fontFamily="monospace" fill="var(--accent)" fontWeight="600">
+            <text x="315" y="86" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fontWeight="700">
               {'  DECL POS P1 ='}
             </text>
-            <text x="315" y="100" fontSize="9" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="100" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  {X 100, Y 200,'}
             </text>
-            <text x="315" y="114" fontSize="9" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="114" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'   Z 300, A 0,'}
             </text>
-            <text x="315" y="128" fontSize="9" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="128" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'   B 0, C 0,'}
             </text>
-            <text x="315" y="142" fontSize="9" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="142" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'   S 6, T 18}'}
             </text>
-            <text x="315" y="160" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="160" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  DECL POS P2 = ...'}
             </text>
-            <text x="315" y="174" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="174" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               ENDDAT
             </text>
-            <text x="315" y="192" fontSize="9" fill="var(--muted)" fontStyle="italic">
+            <text x="315" y="192" fontSize="9" fill="var(--foreground)" fillOpacity="0.6" fontStyle="italic">
               данные, точки
             </text>
           </svg>
@@ -454,9 +455,25 @@ LIN P5"
 
       {/* ScenarioCard */}
       <motion.div variants={fadeInItem}>
+        <p className="text-base font-medium mb-3">
+          Программа ниже не запускается. Что не так?
+        </p>
+        <pre className="font-mono text-xs p-4 rounded-lg bg-card border border-border/50 overflow-x-auto mb-4">{`DEF demo()
+  INI
+  PTP HOME
+  $VEL.CP = 0.3
+  PTP P1
+  LIN P2 C_DIS
+  LIN P3
+END`}</pre>
+        <p className="text-sm text-muted-foreground mb-4">
+          Все команды на месте, <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$VEL.CP</code>{' '}
+          в м/с, <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">HOME</code>{' '}
+          объявлена в <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$config.dat</code>.
+          Но KSS отказывается запускать программу.
+        </p>
         <ScenarioCard
-          scenario="Программа выкидывает ошибку при запуске. Что не так?"
-          context={`DEF demo() / INI / PTP HOME / $VEL.CP = 0.3 / PTP P1 / LIN P2 C_DIS / LIN P3 / END — все команды на месте, $VEL.CP в м/с, HOME объявлена в \\$config.dat. Но KSS отказывается запускать программу.`}
+          scenario="В чём причина ошибки?"
           options={[
             {
               text: '$VEL.CP = 0.3 — неправильная единица измерения',
