@@ -242,10 +242,10 @@ export default function Module2() {
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="60" y="95" textAnchor="middle" fontSize="13" fontWeight="600" fill="var(--accent)">
+            <text x="60" y="95" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--foreground)">
               SmartPAD
             </text>
-            <text x="60" y="113" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="60" y="113" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               KCP, T1/T2/AUT/EXT
             </text>
 
@@ -272,7 +272,7 @@ export default function Module2() {
               strokeWidth="1"
               strokeDasharray="4 3"
             />
-            <text x="275" y="38" textAnchor="middle" fontSize="11" fill="var(--muted)" fontWeight="600">
+            <text x="275" y="38" textAnchor="middle" fontSize="11" fill="var(--foreground)" fillOpacity="0.75" fontWeight="600">
               KRC4 / KRC5
             </text>
 
@@ -287,7 +287,7 @@ export default function Module2() {
               stroke="var(--accent)"
               strokeWidth="1.2"
             />
-            <text x="275" y="73" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
+            <text x="275" y="73" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               Control PC
             </text>
             <text x="275" y="89" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.7">
@@ -305,10 +305,10 @@ export default function Module2() {
               stroke="var(--accent)"
               strokeWidth="1.2"
             />
-            <text x="275" y="128" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
+            <text x="275" y="128" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               KPP / KSP / RDC
             </text>
-            <text x="275" y="145" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="275" y="145" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               Силовая + сервоприводы + резольверы
             </text>
 
@@ -345,13 +345,13 @@ export default function Module2() {
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="482" y="92" textAnchor="middle" fontSize="13" fontWeight="600" fill="var(--accent)">
-              Manipulator
+            <text x="482" y="92" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--foreground)">
+              Манипулятор
             </text>
-            <text x="482" y="110" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="482" y="110" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               A1 · A2 · A3
             </text>
-            <text x="482" y="124" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="482" y="124" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               A4 · A5 · A6
             </text>
 
@@ -366,7 +366,7 @@ export default function Module2() {
               strokeDasharray="3 2"
               markerEnd="url(#arrow)"
             />
-            <text x="412" y="172" textAnchor="middle" fontSize="9" fill="var(--muted)">
+            <text x="412" y="172" textAnchor="middle" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">
               feedback
             </text>
           </svg>

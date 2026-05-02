@@ -234,31 +234,31 @@ public void run() {
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="130" y="42" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--accent)">
+            <text x="130" y="42" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               KRL для KRC4 / KRC5
             </text>
-            <text x="35" y="68" fontSize="10" fill="var(--muted)">
+            <text x="35" y="68" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               язык: в стиле Pascal
             </text>
-            <text x="35" y="86" fontSize="10" fill="var(--muted)">
+            <text x="35" y="86" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               файлы: .src + .dat
             </text>
-            <text x="35" y="104" fontSize="10" fill="var(--muted)">
+            <text x="35" y="104" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               типы: POS, E6POS
             </text>
-            <text x="35" y="124" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="124" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               DEF demo()
             </text>
-            <text x="35" y="140" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="140" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  PTP HOME'}
             </text>
-            <text x="35" y="156" fontSize="10" fontFamily="monospace" fill="var(--accent)" fontWeight="600">
+            <text x="35" y="156" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fontWeight="700">
               {'  LIN P1'}
             </text>
-            <text x="35" y="172" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="35" y="172" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               END
             </text>
-            <text x="35" y="200" fontSize="9" fill="var(--muted)" fontStyle="italic">
+            <text x="35" y="200" fontSize="9" fill="var(--foreground)" fillOpacity="0.75" fontStyle="italic">
               индустриальный, процедурный
             </text>
 
@@ -290,31 +290,31 @@ public void run() {
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="410" y="42" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--accent)">
+            <text x="410" y="42" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               Sunrise.Java для LBR iiwa
             </text>
-            <text x="315" y="68" fontSize="10" fill="var(--muted)">
+            <text x="315" y="68" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               язык: Java (Eclipse)
             </text>
-            <text x="315" y="86" fontSize="10" fill="var(--muted)">
+            <text x="315" y="86" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               парадигма: ООП, многопоточность
             </text>
-            <text x="315" y="104" fontSize="10" fill="var(--muted)">
+            <text x="315" y="104" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               типы: Frame, JointPosition
             </text>
-            <text x="315" y="124" fontSize="9" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="124" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               public void run() {'{'}
             </text>
-            <text x="315" y="140" fontSize="9" fontFamily="monospace" fill="var(--accent)" fontWeight="600">
+            <text x="315" y="140" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fontWeight="700">
               {'  lbr.move(ptp(...))'}
             </text>
-            <text x="315" y="156" fontSize="9" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="156" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'  lbr.move(lin(...))'}
             </text>
-            <text x="315" y="172" fontSize="9" fontFamily="monospace" fill="var(--muted)">
+            <text x="315" y="172" fontSize="9" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               {'}'}
             </text>
-            <text x="315" y="200" fontSize="9" fill="var(--muted)" fontStyle="italic">
+            <text x="315" y="200" fontSize="9" fill="var(--foreground)" fillOpacity="0.75" fontStyle="italic">
               коллаборативный, импедансный
             </text>
           </svg>

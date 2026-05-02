@@ -194,7 +194,7 @@ export default function Module5() {
           >
             {/* Уровень 1: Project */}
             <rect x="10" y="15" width="120" height="30" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.5" />
-            <text x="70" y="35" textAnchor="middle" fontSize="13" fontWeight="600" fill="var(--accent)">
+            <text x="70" y="35" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--foreground)">
               Project
             </text>
 
@@ -203,7 +203,7 @@ export default function Module5() {
 
             {/* Уровень 2: Controller */}
             <rect x="110" y="55" width="160" height="30" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.2" />
-            <text x="190" y="75" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
+            <text x="190" y="75" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               Controller (KRC5_001)
             </text>
 
@@ -212,7 +212,7 @@ export default function Module5() {
 
             {/* Уровень 3: Hardware */}
             <rect x="210" y="95" width="120" height="30" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.2" />
-            <text x="270" y="115" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
+            <text x="270" y="115" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               Hardware
             </text>
 
@@ -221,7 +221,7 @@ export default function Module5() {
 
             {/* Уровень 4: Fieldbus */}
             <rect x="310" y="135" width="160" height="30" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.2" />
-            <text x="390" y="155" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
+            <text x="390" y="155" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               Fieldbus (PROFINET)
             </text>
 
@@ -230,20 +230,20 @@ export default function Module5() {
 
             {/* Уровень 5: Devices */}
             <rect x="200" y="175" width="150" height="30" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.2" />
-            <text x="275" y="195" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
+            <text x="275" y="195" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               Devices
             </text>
 
             {/* Подуровень Devices: Robot R1 / Vision V1 */}
             <path d="M 275 205 L 275 220 L 130 220" stroke="var(--muted)" strokeWidth="1" fill="none" />
             <rect x="50" y="215" width="100" height="22" rx="4" fill="none" stroke="var(--muted)" strokeWidth="1" strokeDasharray="3 2" />
-            <text x="100" y="230" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="100" y="230" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               Robot R1
             </text>
 
             <path d="M 275 205 L 275 220 L 360 220" stroke="var(--muted)" strokeWidth="1" fill="none" />
             <rect x="170" y="215" width="100" height="22" rx="4" fill="none" stroke="var(--muted)" strokeWidth="1" strokeDasharray="3 2" />
-            <text x="220" y="230" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="220" y="230" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               Vision V1
             </text>
 
@@ -252,7 +252,7 @@ export default function Module5() {
 
             {/* IO Mapping */}
             <rect x="210" y="240" width="140" height="30" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.2" />
-            <text x="280" y="260" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
+            <text x="280" y="260" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--foreground)">
               IO Mapping
             </text>
           </svg>

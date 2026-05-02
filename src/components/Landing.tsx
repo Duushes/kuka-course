@@ -296,8 +296,8 @@ function CheatSheetBlock() {
                 <rect x={s.x} y={y} width="32" height={h} rx="2" fill="var(--accent)" fillOpacity={0.10 + i * 0.04} stroke="var(--accent)" strokeWidth="1" />
                 <line x1={s.x + 16} y1={y} x2={s.x + 16} y2={y - 8} stroke="var(--accent)" strokeWidth="1.4" strokeLinecap="round" />
                 <circle cx={s.x + 16} cy={y - 10} r="2.5" fill="var(--accent)" fillOpacity="0.7" />
-                <text x={s.x + 16} y="82" textAnchor="middle" fontSize="6.5" fontWeight="600" fill="var(--accent)">{s.name}</text>
-                <text x={s.x + 16} y="92" textAnchor="middle" fontSize="5.5" fill="var(--accent)" fillOpacity="0.7" dangerouslySetInnerHTML={{ __html: s.desc }} />
+                <text x={s.x + 16} y="82" textAnchor="middle" fontSize="6.5" fontWeight="700" fill="var(--foreground)">{s.name}</text>
+                <text x={s.x + 16} y="92" textAnchor="middle" fontSize="5.5" fill="var(--foreground)" fillOpacity="0.7" dangerouslySetInnerHTML={{ __html: s.desc }} />
               </g>
             );
           })}

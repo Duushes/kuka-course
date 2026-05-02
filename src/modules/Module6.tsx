@@ -272,24 +272,24 @@ export default function Module6() {
             aria-label="Робот в центре, вокруг — три зоны безопасности: зелёная (safe), жёлтая (reduced speed), красная (stop). Сверху — таблица категорий Cat 0/1/2."
           >
             {/* Заголовок и таблица Cat 0/1/2 */}
-            <text x="240" y="22" textAnchor="middle" fontSize="11" fill="var(--muted)" fontWeight="600">
+            <text x="240" y="22" textAnchor="middle" fontSize="11" fill="var(--foreground)" fillOpacity="0.75" fontWeight="600">
               Категории остановок (EN 60204-1)
             </text>
 
             {/* Cat 0 */}
             <rect x="40" y="32" width="120" height="38" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1" />
-            <text x="100" y="48" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--accent)">Cat 0</text>
-            <text x="100" y="62" textAnchor="middle" fontSize="9" fill="var(--muted)">power off → brake</text>
+            <text x="100" y="48" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--foreground)">Cat 0</text>
+            <text x="100" y="62" textAnchor="middle" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">power off → brake</text>
 
             {/* Cat 1 */}
             <rect x="180" y="32" width="120" height="38" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1" />
-            <text x="240" y="48" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--accent)">Cat 1</text>
-            <text x="240" y="62" textAnchor="middle" fontSize="9" fill="var(--muted)">stop → power off</text>
+            <text x="240" y="48" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--foreground)">Cat 1</text>
+            <text x="240" y="62" textAnchor="middle" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">stop → power off</text>
 
             {/* Cat 2 */}
             <rect x="320" y="32" width="120" height="38" rx="6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1" />
-            <text x="380" y="48" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--accent)">Cat 2</text>
-            <text x="380" y="62" textAnchor="middle" fontSize="9" fill="var(--muted)">stop, power on</text>
+            <text x="380" y="48" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--foreground)">Cat 2</text>
+            <text x="380" y="62" textAnchor="middle" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">stop, power on</text>
 
             {/* Зоны: red — внешняя (stop) */}
             <circle cx="240" cy="190" r="100" fill="#ef4444" fillOpacity="0.12" stroke="#ef4444" strokeWidth="1.2" strokeDasharray="4 3" />
@@ -312,19 +312,19 @@ export default function Module6() {
 
             {/* Пояснения справа */}
             <line x1="282" y1="190" x2="320" y2="190" stroke="#22c55e" strokeWidth="1" />
-            <text x="324" y="194" fontSize="9" fill="var(--muted)">safe op — full speed</text>
+            <text x="324" y="194" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">safe op — full speed</text>
 
             <line x1="310" y1="170" x2="320" y2="170" stroke="#f59e0b" strokeWidth="1" />
-            <text x="324" y="174" fontSize="9" fill="var(--muted)">reduced — &lt; 250 mm/s</text>
+            <text x="324" y="174" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">reduced — &lt; 250 mm/s</text>
 
             <line x1="340" y1="150" x2="350" y2="150" stroke="#ef4444" strokeWidth="1" />
-            <text x="354" y="154" fontSize="9" fill="var(--muted)">stop — Cat 1</text>
+            <text x="354" y="154" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">stop — Cat 1</text>
 
             {/* Пояснения слева */}
-            <text x="20" y="194" fontSize="9" fill="var(--muted)">TCP</text>
+            <text x="20" y="194" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">TCP</text>
             <line x1="40" y1="190" x2="200" y2="190" stroke="var(--muted)" strokeWidth="0.6" strokeDasharray="2 2" />
 
-            <text x="240" y="288" textAnchor="middle" fontSize="9" fill="var(--muted)">
+            <text x="240" y="288" textAnchor="middle" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">
               SafeOperation мониторит TCP относительно зон в реальном времени
             </text>
           </svg>

@@ -249,22 +249,22 @@ EKI_WAIT("ProdServer")
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="110" y="62" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--accent)">
+            <text x="110" y="62" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--foreground)">
               KRC
             </text>
-            <text x="110" y="80" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="110" y="80" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               Ядро реального времени
             </text>
-            <text x="110" y="108" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="110" y="108" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               интерполятор
             </text>
-            <text x="110" y="126" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="110" y="126" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               сервоприводы
             </text>
-            <text x="110" y="144" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="110" y="144" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               энкодеры
             </text>
-            <text x="110" y="166" textAnchor="middle" fontSize="9" fontStyle="italic" fill="var(--muted)">
+            <text x="110" y="166" textAnchor="middle" fontSize="9" fontStyle="italic" fill="var(--foreground)" fillOpacity="0.75">
               VxWorks RTOS
             </text>
 
@@ -279,22 +279,22 @@ EKI_WAIT("ProdServer")
               stroke="var(--accent)"
               strokeWidth="1.5"
             />
-            <text x="430" y="62" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--accent)">
+            <text x="430" y="62" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--foreground)">
               External PC
             </text>
-            <text x="430" y="80" textAnchor="middle" fontSize="10" fill="var(--muted)">
+            <text x="430" y="80" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.75">
               RSI controller
             </text>
-            <text x="430" y="108" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="430" y="108" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               force / vision
             </text>
-            <text x="430" y="126" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="430" y="126" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               алгоритм
             </text>
-            <text x="430" y="144" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--muted)">
+            <text x="430" y="144" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="var(--foreground)" fillOpacity="0.75">
               коррекции
             </text>
-            <text x="430" y="166" textAnchor="middle" fontSize="9" fontStyle="italic" fill="var(--muted)">
+            <text x="430" y="166" textAnchor="middle" fontSize="9" fontStyle="italic" fill="var(--foreground)" fillOpacity="0.75">
               Linux RT / Windows
             </text>
 
@@ -338,7 +338,7 @@ EKI_WAIT("ProdServer")
             <line x1="207" y1="225" x2="207" y2="235" stroke="var(--accent)" strokeWidth="1.5" />
             <line x1="353" y1="225" x2="353" y2="235" stroke="var(--accent)" strokeWidth="1.5" />
             <line x1="500" y1="225" x2="500" y2="235" stroke="var(--accent)" strokeWidth="1.5" />
-            <text x="60" y="252" textAnchor="middle" fontSize="9" fill="var(--muted)">
+            <text x="60" y="252" textAnchor="middle" fontSize="9" fill="var(--foreground)" fillOpacity="0.75">
               0
             </text>
             <text x="207" y="252" textAnchor="middle" fontSize="9" fill="var(--accent)" fontWeight="600">
@@ -350,7 +350,7 @@ EKI_WAIT("ProdServer")
             <text x="500" y="252" textAnchor="middle" fontSize="9" fill="var(--accent)" fontWeight="600">
               12 мс
             </text>
-            <text x="280" y="270" textAnchor="middle" fontSize="9" fill="var(--muted)" fontStyle="italic">
+            <text x="280" y="270" textAnchor="middle" fontSize="9" fill="var(--foreground)" fillOpacity="0.75" fontStyle="italic">
               интерполяционные тики RSI
             </text>
           </svg>
