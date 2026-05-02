@@ -402,6 +402,60 @@ export default function Landing() {
         </div>
       </motion.div>
 
+      {/* Что такое промышленный робот за 60 секунд */}
+      <motion.div variants={item} className="mt-16 mb-4">
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+          Что такое промышленный робот за 60 секунд
+        </h2>
+        <motion.div variants={container} initial="hidden" animate="show" className="mt-6 grid sm:grid-cols-3 gap-6">
+          <motion.div variants={item} className="p-5 rounded-xl border border-border/50 bg-card">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect x="10" y="25" width="12" height="4" rx="0.8" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.4" />
+              <line x1="16" y1="25" x2="16" y2="19" stroke="var(--accent)" strokeWidth="1.6" strokeLinecap="round" />
+              <circle cx="16" cy="19" r="2" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.4" />
+              <line x1="16" y1="19" x2="22" y2="13" stroke="var(--accent)" strokeWidth="1.6" strokeLinecap="round" />
+              <circle cx="22" cy="13" r="2" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.4" />
+              <line x1="22" y1="13" x2="26" y2="9" stroke="var(--accent)" strokeWidth="1.6" strokeLinecap="round" />
+              <circle cx="26" cy="9" r="1.6" fill="var(--accent)" stroke="var(--accent)" strokeWidth="1.2" />
+            </svg>
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Манипулятор</strong> &mdash; шарнирная механическая рука с 6 (или 7) подвижными осями. На конце &mdash; инструмент: захват, сварочная горелка, кисть для покраски.
+            </p>
+          </motion.div>
+
+          <motion.div variants={item} className="p-5 rounded-xl border border-border/50 bg-card">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect x="6" y="5" width="16" height="22" rx="1.2" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.4" />
+              <line x1="10" y1="9" x2="18" y2="9" stroke="var(--accent)" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="10" y1="13" x2="18" y2="13" stroke="var(--accent)" strokeWidth="1.2" strokeLinecap="round" />
+              <circle cx="11" cy="20" r="1.2" fill="var(--accent)" />
+              <circle cx="14.5" cy="20" r="1.2" fill="var(--accent)" fillOpacity="0.5" />
+              <circle cx="18" cy="20" r="1.2" fill="var(--accent)" fillOpacity="0.3" />
+              <circle cx="20" cy="16" r="0.8" fill="var(--accent)" />
+              <path d="M22 20 Q26 20 26 24 L26 28" stroke="var(--accent)" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+            </svg>
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Контроллер</strong> &mdash; отдельный электрический шкаф рядом с роботом. Внутри &mdash; промышленный компьютер, силовая электроника, ОС реального времени. У KUKA это шкаф KRC4 или KRC5.
+            </p>
+          </motion.div>
+
+          <motion.div variants={item} className="p-5 rounded-xl border border-border/50 bg-card">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect x="7" y="4" width="14" height="20" rx="1.6" fill="var(--accent-light)" stroke="var(--accent)" strokeWidth="1.4" />
+              <rect x="9" y="6.5" width="10" height="13" rx="0.5" stroke="var(--accent)" strokeWidth="1" fill="none" strokeOpacity="0.6" />
+              <circle cx="14" cy="22" r="0.9" fill="var(--accent)" />
+              <path d="M21 8 Q26 8 26 13 L26 28" stroke="var(--accent)" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+            </svg>
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Пульт оператора</strong> &mdash; портативный touch-экран на кабеле. С него человек обучает точки, запускает программу, останавливает робота. У KUKA это SmartPAD.
+            </p>
+          </motion.div>
+        </motion.div>
+        <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
+          Этот курс &mdash; про то, как со всем этим работать на роботах KUKA, от первых движений до интеграции с PLC.
+        </p>
+      </motion.div>
+
       {/* Программа курса */}
       <motion.div variants={item} className="mt-16 sm:mt-20">
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-6">

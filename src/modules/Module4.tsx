@@ -9,6 +9,7 @@ import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
 import InputExercise from '@/components/InputExercise';
 import ScenarioCard from '@/components/ScenarioCard';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module4() {
@@ -160,6 +161,55 @@ ENDDAT`}</pre>
         </ul>
       </motion.div>
 
+      {/* Quiz — сразу после блока «Команды движения» */}
+      <motion.div variants={fadeInItem}>
+        <Quiz
+          question="Какая команда движения гарантирует прохождение через точку (без сглаживания) с линейной траекторией в декартовом пространстве?"
+          options={[
+            {
+              text: 'PTP P1',
+              explanation:
+                'PTP идёт по осям, траектория TCP в декартовом пространстве не линейная.',
+            },
+            {
+              text: 'LIN P1',
+              correct: true,
+              explanation:
+                'LIN P1 без флагов approximation проходит точно через P1 по прямой в декартовом пространстве.',
+            },
+            {
+              text: 'LIN P1 C_DIS',
+              explanation:
+                'C_DIS — это approximation: робот скругляет траекторию около P1, не проходит точно через точку.',
+            },
+            {
+              text: 'SPLINE ... ENDSPLINE',
+              explanation:
+                'SPLINE задаёт гладкую кривую через несколько точек, не прямую линию.',
+            },
+          ]}
+        />
+      </motion.div>
+
+      {/* DragDrop — сразу после Quiz, оба про команды движения */}
+      <motion.div variants={fadeInItem}>
+        <DragDrop
+          instruction="Сопоставьте команду движения с типом траектории"
+          items={[
+            { id: 'ptp', text: 'Кратчайшее движение по осям, траектория TCP не предсказуема' },
+            { id: 'lin', text: 'Прямая линия в декартовом пространстве' },
+            { id: 'circ', text: 'Дуга через 2 опорные точки' },
+            { id: 'spline', text: 'Плавная кривая через несколько точек' },
+          ]}
+          zones={[
+            { id: 'z-ptp', label: 'PTP', acceptIds: ['ptp'] },
+            { id: 'z-lin', label: 'LIN', acceptIds: ['lin'] },
+            { id: 'z-circ', label: 'CIRC', acceptIds: ['circ'] },
+            { id: 'z-spline', label: 'SPLINE', acceptIds: ['spline'] },
+          ]}
+        />
+      </motion.div>
+
       {/* Теория 4: approximation и FOLD */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
         <h2 className="text-xl font-semibold mb-4">Approximation и FOLD-блоки</h2>
@@ -181,11 +231,14 @@ LIN P2 C_DIS      ; скругление около P2 — без останов
 LIN P3 C_DIS      ; скругление около P3
 LIN P4            ; точное прохождение через P4 (стоп)`}</pre>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          <strong className="text-foreground">FOLD &hellip; ENDFOLD</strong> &mdash;
-          &laquo;свёрнутый&raquo; блок, который SmartPAD автоматически генерирует при
-          обучении точки. Внутри лежит inline-конфигурация: скорость, ускорение, флаги
-          approximation. По умолчанию редактор показывает FOLD как одну строку, но блок
-          можно развернуть и редактировать вручную.
+          <strong className="text-foreground">FOLD &hellip; ENDFOLD</strong> &mdash; пара
+          синтаксических <em>комментариев-маркеров</em> для редактора SmartPAD: всё, что
+          между ними, в IDE сворачивается за одной читаемой строкой описания (например,{' '}
+          <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">;FOLD PTP P1 Vel=100% PDAT1</code>).
+          Сам код внутри &mdash; обычный исполняемый KRL, не &laquo;конфигурация&raquo;.
+          SmartPAD использует FOLD, чтобы спрятать сгенерированную обвязку движения и
+          оставить программисту чистую читаемую программу. Развернуть и редактировать
+          можно вручную.
         </p>
       </motion.div>
 
@@ -227,6 +280,31 @@ LIN P4            ; точное прохождение через P4 (стоп)
             заранее знать P3.
           </li>
         </ul>
+      </motion.div>
+
+      {/* InputExercise — сразу после блока «Системные переменные ($-variables)» */}
+      <motion.div variants={fadeInItem}>
+        <InputExercise
+          prompt="Напишите команду линейного движения к точке P5 со скоростью 0.3 м/с."
+          hint="Подсказка: используйте команду LIN, имя точки P5, и переменную $VEL.CP."
+          placeholder="$VEL.CP = 0.3&#10;LIN P5"
+          validate={(value: string) => {
+            const lines = value
+              .trim()
+              .split('\n')
+              .map((s) => s.trim())
+              .filter((s) => s.length > 0 && !s.startsWith(';'));
+            if (lines.length < 2) return false;
+            const hasVelLine = lines.some((line) => /^\$?VEL\.?CP\s*=\s*0\.3\b/i.test(line));
+            const hasLinLine = lines.some((line) => /^LIN\s+P5\b/i.test(line));
+            const velIdx = lines.findIndex((line) => /^\$?VEL\.?CP\s*=\s*0\.3\b/i.test(line));
+            const linIdx = lines.findIndex((line) => /^LIN\s+P5\b/i.test(line));
+            return hasVelLine && hasLinLine && velIdx < linIdx;
+          }}
+          successMessage="Верно! Скорость задана через $VEL.CP перед линейным движением."
+          exampleAnswer="$VEL.CP = 0.3
+LIN P5"
+        />
       </motion.div>
 
       {/* Теория 6: INTERRUPT / TRIGGER */}
@@ -387,73 +465,16 @@ LIN P5`}</pre>
         </p>
       </motion.div>
 
-      {/* Quiz */}
-      <motion.div variants={fadeInItem}>
-        <Quiz
-          question="Какая команда движения гарантирует прохождение через точку (без сглаживания) с линейной траекторией в декартовом пространстве?"
-          options={[
-            {
-              text: 'PTP P1',
-              explanation:
-                'PTP идёт по осям, траектория TCP в декартовом пространстве не линейная.',
-            },
-            {
-              text: 'LIN P1',
-              correct: true,
-              explanation:
-                'LIN P1 без флагов approximation проходит точно через P1 по прямой в декартовом пространстве.',
-            },
-            {
-              text: 'LIN P1 C_DIS',
-              explanation:
-                'C_DIS — это approximation: робот скругляет траекторию около P1, не проходит точно через точку.',
-            },
-            {
-              text: 'SPLINE ... ENDSPLINE',
-              explanation:
-                'SPLINE задаёт гладкую кривую через несколько точек, не прямую линию.',
-            },
-          ]}
-        />
-      </motion.div>
+      <Takeaways
+        items={[
+          'Программа KRL — пара файлов: .src (логика) + .dat (данные точек). Без декларации точки в .dat программа не запустится.',
+          'Команды движения: PTP (по осям, нелинейная траектория), LIN (прямая в декартовом), CIRC (дуга), SPLINE (плавная кривая через несколько точек).',
+          'Approximation (C_DIS / C_ORI / C_VEL) — флаги «не останавливайся, скругли». Без них робот точно проходит через точку.',
+          '$VEL.CP задаёт Cartesian velocity в м/с. Типичный диапазон 0.1–2 м/с (сварка ≈ 0.01–0.1, перенос ≈ 1–2).',
+        ]}
+      />
 
-      {/* DragDrop */}
-      <motion.div variants={fadeInItem}>
-        <DragDrop
-          instruction="Сопоставьте команду движения с типом траектории"
-          items={[
-            { id: 'ptp', text: 'Кратчайшее движение по осям, траектория TCP не предсказуема' },
-            { id: 'lin', text: 'Прямая линия в декартовом пространстве' },
-            { id: 'circ', text: 'Дуга через 2 опорные точки' },
-            { id: 'spline', text: 'Плавная кривая через несколько точек' },
-          ]}
-          zones={[
-            { id: 'z-ptp', label: 'PTP', acceptIds: ['ptp'] },
-            { id: 'z-lin', label: 'LIN', acceptIds: ['lin'] },
-            { id: 'z-circ', label: 'CIRC', acceptIds: ['circ'] },
-            { id: 'z-spline', label: 'SPLINE', acceptIds: ['spline'] },
-          ]}
-        />
-      </motion.div>
-
-      {/* InputExercise */}
-      <motion.div variants={fadeInItem}>
-        <InputExercise
-          prompt="Напишите команду линейного движения к точке P5 со скоростью 0.3 м/с."
-          hint="Подсказка: используйте команду LIN, имя точки P5, и переменную $VEL.CP."
-          placeholder="$VEL.CP = 0.3&#10;LIN P5"
-          validate={(value: string) => {
-            const hasLin = /LIN\s+P5/i.test(value);
-            const hasVel = /0\.3/.test(value) || /VEL\.?CP\s*=\s*0\.3/i.test(value);
-            return hasLin && hasVel;
-          }}
-          successMessage="Верно! Скорость задана через $VEL.CP перед линейным движением."
-          exampleAnswer="$VEL.CP = 0.3
-LIN P5"
-        />
-      </motion.div>
-
-      {/* ScenarioCard */}
+      {/* ScenarioCard — финальный apply */}
       <motion.div variants={fadeInItem}>
         <p className="text-base font-medium mb-3">
           Программа ниже не запускается. Что не так?
@@ -467,10 +488,10 @@ LIN P5"
   LIN P3
 END`}</pre>
         <p className="text-sm text-muted-foreground mb-4">
-          Все команды на месте, <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$VEL.CP</code>{' '}
-          в м/с, <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">HOME</code>{' '}
-          объявлена в <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$config.dat</code>.
-          Но KSS отказывается запускать программу.
+          Все команды синтаксически на месте,{' '}
+          <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$VEL.CP</code>{' '}
+          в м/с. Но KSS отказывается запускать программу. <em>В&nbsp;.dat&nbsp;демки декларации
+          точек отсутствуют, а&nbsp;<code className="font-mono">HOME</code> в проект не добавлена.</em>
         </p>
         <ScenarioCard
           scenario="В чём причина ошибки?"
@@ -482,9 +503,9 @@ END`}</pre>
               score: 0,
             },
             {
-              text: 'P1, P2, P3 не объявлены в .dat-файле или не обучены через SmartPAD',
+              text: 'P1, P2, P3 (и HOME, если её нет в $config.dat проекта) не объявлены — нужны DECL POS = {...} в .dat или Touch Up через SmartPAD',
               outcome:
-                'Верно. Без DECL POS P1 = {...} в .dat (или без обучения через SmartPAD) KSS не знает, куда двигаться, и выдаёт ошибку компиляции/запуска.',
+                'Верно. KSS не знает координат точек: без DECL POS = {...} в demo.dat (или обучения через SmartPAD) программа не запустится. HOME / XHOME — конвенция KUKA, обычно создаётся инсталляционным мастером в $config.dat; в учебном проекте её тоже нужно объявить явно.',
               score: 1,
             },
             {
@@ -494,9 +515,9 @@ END`}</pre>
               score: 0,
             },
             {
-              text: 'PTP HOME не зарезервированное имя',
+              text: 'INI блок не нужен, его и нужно убрать',
               outcome:
-                'Нет: HOME — стандартная глобальная точка KUKA, объявлена в $config.dat и доступна в любой программе.',
+                'Наоборот: INI обязателен в начале программы — он инициализирует $BASE, $TOOL, $VEL и другие системные переменные. Убрать INI означает работать с непредсказуемыми значениями.',
               score: 0,
             },
           ]}

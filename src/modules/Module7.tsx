@@ -7,6 +7,7 @@
 import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module7() {
@@ -263,20 +264,41 @@ export default function Module7() {
         </p>
       </motion.div>
 
+      <Takeaways
+        items={[
+          'PalletTech — палеттирование без KRL-кода (graphical pallet editor в WorkVisual).',
+          'ArcTech — встроенные параметры сварки (WeldOn / WeldOff / Weave) в KRL-командах движения.',
+          'VisionTech — 2D-распознавание; результат — координаты объекта в BASE.',
+          'mxAutomation — программирование робота из PLC (S7-1500 / 1200 / 300 / 400) через TIA Portal. Робот — slave.',
+        ]}
+      />
+
       {/* Quiz */}
       <motion.div variants={fadeInItem}>
         <Quiz
           question="Какой пакет KUKA позволяет программировать робота из PLC без написания KRL-программы?"
           options={[
-            { text: 'PalletTech' },
-            { text: 'ArcTech' },
+            {
+              text: 'PalletTech',
+              explanation:
+                'PalletTech генерирует KRL-программу на стороне робота: задача укладки решается в WorkVisual, но программа потом исполняется на KRC, а не в PLC.',
+            },
+            {
+              text: 'ArcTech',
+              explanation:
+                'ArcTech добавляет команды сварки в KRL-программе. Робот по-прежнему программируется на KRL, просто с расширенным синтаксисом для дуги.',
+            },
             {
               text: 'mxAutomation',
               correct: true,
               explanation:
-                'mxAutomation предоставляет блоки FB для S7-1500/1200/300/400, программирование выполняется в TIA Portal на стороне PLC. Робот в этом случае — slave, исполняет команды.',
+                'mxAutomation предоставляет блоки FB для S7-1500/1200/300/400. Программирование выполняется в TIA Portal на стороне PLC. Робот — slave, исполняет команды.',
             },
-            { text: 'VisionTech' },
+            {
+              text: 'VisionTech',
+              explanation:
+                'VisionTech решает задачу 2D-распознавания. Координаты найденного объекта передаются в KRL-программу, но саму логику движения по-прежнему пишет программист робота.',
+            },
           ]}
         />
       </motion.div>

@@ -9,6 +9,7 @@ import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
 import ScenarioCard from '@/components/ScenarioCard';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module9() {
@@ -318,6 +319,14 @@ public void run() {
           WorkVisual; для LBR iiwa &mdash; Sunrise.Java и Sunrise.Workbench.
         </p>
       </motion.div>
+
+      <Takeaways
+        items={[
+          'LBR iiwa — отдельная экосистема: Sunrise.OS + Sunrise Cabinet + Java через Sunrise.Workbench. Не KRC, не KRL.',
+          'KUKA.Sim 4 — offline-симулятор (на базе Visual Components) с экспортом KRL. Trial 1 год через my.kuka. Без OfficeLite не выполняет полный KSS runtime.',
+          'Алгоритм troubleshooting: SmartPAD → активные сообщения → корневая причина → Acknowledge all → если не помогло → код ошибки в Xpert.',
+        ]}
+      />
 
       {/* Quiz */}
       <motion.div variants={fadeInItem}>

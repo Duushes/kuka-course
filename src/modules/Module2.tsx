@@ -7,6 +7,7 @@
 import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module2() {
@@ -85,8 +86,10 @@ export default function Module2() {
           <li>
             <strong className="text-foreground">Control PC</strong> &mdash; промышленный
             x86-совместимый компьютер, на нём крутится
-            <strong className="text-foreground"> KSS</strong> (KUKA System Software, OS на
-            базе VxWorks реального времени плюс Windows для UI).
+            <strong className="text-foreground"> KSS</strong> (KUKA System Software).
+            Это набор ПО (компилятор KRL, motion planner, web-интерфейс), который работает
+            поверх ОС: на KRC4 &mdash; Windows Embedded Standard&nbsp;7 с RT-расширением
+            VxWin/RTX; на KRC5 &mdash; Linux с RT-патчем.
           </li>
           <li>
             <strong className="text-foreground">KPP</strong> (KUKA Power Pack) &mdash;
@@ -283,8 +286,8 @@ export default function Module2() {
             <text x="275" y="73" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--accent)">
               Control PC
             </text>
-            <text x="275" y="89" textAnchor="middle" fontSize="10" fill="var(--muted)">
-              KSS — VxWorks + Windows
+            <text x="275" y="89" textAnchor="middle" fontSize="10" fill="var(--foreground)" fillOpacity="0.7">
+              KSS на Windows / Linux + RT
             </text>
 
             {/* KPP / KSP / RDC */}
@@ -370,20 +373,40 @@ export default function Module2() {
         </p>
       </motion.div>
 
+      <Takeaways
+        items={[
+          'KRC4 и KRC5 — два поколения шкафа, программно совместимы (KSS 8.7+); KRC5 компактнее.',
+          'SmartPAD — пульт оператора: ключ режимов (T1 / T2 / AUT / EXT) + enabling switch + e-stop.',
+          'Полевые шины KUKA «из коробки»: PROFINET, EtherCAT, EtherNet/IP, ProfiBus, DeviceNet.',
+        ]}
+      />
+
       {/* Quiz */}
       <motion.div variants={fadeInItem}>
         <Quiz
           question="Чем KRC5 принципиально отличается от KRC4?"
           options={[
-            { text: 'Поддерживает только KRL 1.x' },
+            {
+              text: 'Поддерживает только KRL 1.x',
+              explanation:
+                'KRL 1.x — это даже не реальная версионность языка KUKA. KRL развивается в рамках KSS, без принципиальных революций между поколениями шкафа.',
+            },
             {
               text: 'Поддерживает KSS 8.7+ и более компактный шкаф; общий стек KSS/VSS, программно совместим с KRC4',
               correct: true,
               explanation:
-                'KRC5 — следующее поколение, программно совместим с KRC4 (KSS 8.7+).',
+                'KRC5 — следующее поколение, программно совместим с KRC4 (KSS 8.7+). KPP+KSP объединены на одной плате, шкаф ~50% объёма KRC4.',
             },
-            { text: 'Не поддерживает PROFINET' },
-            { text: 'Поддерживает только LBR iiwa' },
+            {
+              text: 'Не поддерживает PROFINET',
+              explanation:
+                'PROFINET — базовая полевая шина для KUKA, поддерживается и KRC4, и KRC5 «из коробки».',
+            },
+            {
+              text: 'Поддерживает только LBR iiwa',
+              explanation:
+                'LBR iiwa — это cobot со своим контроллером Sunrise Cabinet, не KRC. KRC5 рассчитан на классические индустриальные манипуляторы серий KR.',
+            },
           ]}
         />
       </motion.div>

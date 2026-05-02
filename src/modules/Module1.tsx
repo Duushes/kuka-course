@@ -8,6 +8,7 @@ import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
 import ScenarioCard from '@/components/ScenarioCard';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module1() {
@@ -25,9 +26,16 @@ export default function Module1() {
       {/* Введение */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
         <p className="text-muted-foreground leading-relaxed">
-          Прежде чем погружаться в KRL, конфигурирование KUKA.WorkVisual или интеграцию робота
-          с PLC, полезно понять, <em>с кем именно</em> вы работаете. KUKA &mdash; не один робот,
-          а целая линейка от компактных 6-осевых моделей до тяжёлых foundry-манипуляторов
+          Прежде чем погружаться в <strong className="text-foreground">KRL</strong>{' '}
+          <span className="text-muted-foreground/70">(KUKA Robot Language &mdash; язык программирования роботов KUKA)</span>,
+          конфигурирование <strong className="text-foreground">KUKA.WorkVisual</strong>{' '}
+          <span className="text-muted-foreground/70">(инженерная среда KUKA для конфигурации роботизированной ячейки)</span>{' '}
+          или интеграцию робота с <strong className="text-foreground">PLC</strong>{' '}
+          <span className="text-muted-foreground/70">(Programmable Logic Controller, промышленный контроллер)</span>,
+          полезно понять, <em>с кем именно</em> вы работаете. KUKA &mdash; не один робот,
+          а целая линейка от компактных 6-осевых моделей до тяжёлых{' '}
+          <strong className="text-foreground">foundry</strong>{' '}
+          <span className="text-muted-foreground/70">(литейное производство)</span>-манипуляторов
           и единственного в семействе коллаборативного <strong className="text-foreground">LBR&nbsp;iiwa</strong>.
         </p>
         <p className="text-muted-foreground leading-relaxed">
@@ -49,8 +57,9 @@ export default function Module1() {
         </p>
         <p className="text-muted-foreground leading-relaxed">
           По установленной базе KUKA удерживает третье место в мире после FANUC и ABB.
-          Около половины выручки приходится на <em>automotive</em> &mdash; KUKA исторически
-          сильна в кузовных линиях BMW, Mercedes-Benz, Volkswagen. В России среди крупных клиентов:
+          Около половины выручки приходится на <em>automotive</em>{' '}
+          <span className="text-muted-foreground/70">(автомобильное производство)</span> &mdash;
+          KUKA исторически сильна в кузовных линиях BMW, Mercedes-Benz, Volkswagen. В России среди крупных клиентов:
           Sollers, КамАЗ, ОДК, ряд предприятий металлообработки и foundry.
         </p>
       </motion.div>
@@ -60,7 +69,9 @@ export default function Module1() {
         <h2 className="text-xl font-semibold mb-4">Линейка роботов: от AGILUS до FORTEC</h2>
         <p className="text-muted-foreground leading-relaxed mb-6">
           KUKA не делает &laquo;универсального робота&raquo;. Каждая серия закрывает свой
-          диапазон по payload и типичным сценариям. Запомнить пять-шесть имён достаточно,
+          диапазон по <strong className="text-foreground">payload</strong>{' '}
+          <span className="text-muted-foreground/70">(полезная нагрузка робота, максимальный вес инструмента и объекта)</span>{' '}
+          и типичным сценариям. Запомнить пять-шесть имён достаточно,
           чтобы ориентироваться в 90% запросов от заказчиков.
         </p>
 
@@ -169,6 +180,14 @@ export default function Module1() {
         </ul>
       </motion.div>
 
+      <Takeaways
+        items={[
+          'KUKA — один из «большой четвёрки» промышленных роботов (с ABB, FANUC, Yaskawa Motoman); № 3 в мире по installed base.',
+          'Линейка по payload: AGILUS (6–10 кг) → CYBERTECH (8–22) → QUANTEC (90–300) → FORTEC (360–1300). LBR iiwa — единственный cobot.',
+          'Робот не работает в одиночку: типичная ячейка = робот + PLC + сенсоры + конвейер + safety-PLC. KUKA даёт пакеты для интеграции (WorkVisual, KUKA.Sim, mxAutomation).',
+        ]}
+      />
+
       {/* Quiz */}
       <motion.div variants={fadeInItem}>
         <Quiz
@@ -195,8 +214,10 @@ export default function Module1() {
           В последние годы компания агрессивно идёт в <strong className="text-foreground">логистику</strong>
           {' '}и <strong className="text-foreground">медицинские применения</strong>:
           KMR iiwa в больничных лабораториях, LBR iiwa &mdash; в сборке электроники
-          бок о бок с операторами. Это объясняет, почему ставку на cobot-серию делают
-          даже там, где раньше был чисто индустриальный сегмент.
+          бок о бок с операторами. Это объясняет, почему ставку на{' '}
+          <strong className="text-foreground">cobot</strong>{' '}
+          <span className="text-muted-foreground/70">(коллаборативный робот, безопасный для работы рядом с человеком)</span>-серию
+          делают даже там, где раньше был чисто индустриальный сегмент.
         </p>
       </motion.div>
 
@@ -238,12 +259,14 @@ export default function Module1() {
             конфигурация контроллера, mapping I/O, профили безопасности.
           </li>
           <li>
-            <strong className="text-foreground">KUKA.Sim</strong> &mdash; offline-симулятор
-            для отладки траекторий и расчёта такта без реального робота.
+            <strong className="text-foreground">KUKA.Sim</strong>{' '}
+            <span className="text-muted-foreground/70">(симулятор KUKA для офлайн-программирования)</span> &mdash;
+            offline-симулятор для отладки траекторий и расчёта такта без реального робота.
           </li>
           <li>
-            <strong className="text-foreground">KUKA.mxAutomation</strong> &mdash; библиотеки
-            для управления роботом напрямую из PLC: робот превращается в &laquo;функциональный
+            <strong className="text-foreground">KUKA.mxAutomation</strong>{' '}
+            <span className="text-muted-foreground/70">(пакет KUKA для управления роботом из PLC)</span> &mdash;
+            библиотеки для управления роботом напрямую из PLC: робот превращается в &laquo;функциональный
             блок&raquo; рядом с приводами и пневматикой.
           </li>
         </ul>
@@ -252,7 +275,7 @@ export default function Module1() {
       {/* Scenario */}
       <motion.div variants={fadeInItem}>
         <ScenarioCard
-          scenario="Заказчик хочет робота для палеттирования коробок 30 кг на склад логистического центра. Какую серию выбираем?"
+          scenario="Заказчик хочет робота для палеттирования коробок до 100 кг с темпом 12 циклов в минуту на складе логистического центра. Какую серию выбираем?"
           context="Стационарный пост у конвейера, такт средний, бюджет — типовой для логистики."
           options={[
             {
@@ -284,7 +307,9 @@ export default function Module1() {
         <h2 className="text-xl font-semibold mb-4">Что важно унести из модуля</h2>
         <ul className="space-y-2 text-muted-foreground leading-relaxed">
           <li>
-            KUKA &mdash; одна из &laquo;большой четвёрки&raquo;, № 3 по installed base,
+            KUKA &mdash; одна из &laquo;большой четвёрки&raquo;, № 3 по{' '}
+            <strong className="text-foreground">installed base</strong>{' '}
+            <span className="text-muted-foreground/70">(количество установленных роботов в эксплуатации)</span>,
             с сильной экспозицией в automotive.
           </li>
           <li>

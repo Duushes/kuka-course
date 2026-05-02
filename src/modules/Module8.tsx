@@ -8,6 +8,7 @@ import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
 import ScenarioCard from '@/components/ScenarioCard';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module8() {
@@ -107,6 +108,33 @@ export default function Module8() {
 </Sen>`}</pre>
       </motion.div>
 
+      {/* Quiz — сразу после блока «RSI — Robot Sensor Interface» */}
+      <motion.div variants={fadeInItem}>
+        <Quiz
+          question="Минимальная типичная периодичность цикла KUKA RSI?"
+          options={[
+            {
+              text: '100 мс',
+              explanation: '100 мс — это уровень EKI или PLC-обмена, но не RSI.',
+            },
+            {
+              text: '50 мс',
+              explanation: '50 мс — характерная latency для EthernetKRL EKI, не для real-time RSI.',
+            },
+            {
+              text: '4–12 мс',
+              correct: true,
+              explanation:
+                'RSI работает с интерполяционным циклом 4–12 мс (зависит от версии и настроек), что делает его пригодным для real-time коррекций.',
+            },
+            {
+              text: '1 с',
+              explanation: '1 с — это уровень OPC UA / SCADA, не подходит для real-time коррекций траектории.',
+            },
+          ]}
+        />
+      </motion.div>
+
       {/* Теория 3: EthernetKRL */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
         <h2 className="text-xl font-semibold mb-4">EthernetKRL (EKI) &mdash; TCP/IP сокеты</h2>
@@ -139,9 +167,11 @@ EKI_WAIT("ProdServer")
         <p className="text-muted-foreground leading-relaxed">
           <strong className="text-foreground">OPC UA</strong> (Open Platform Communications
           Unified Architecture) &mdash; открытый промышленный стандарт, поддерживаемый
-          фондом OPC Foundation. С KSS&nbsp;8.5+ KUKA поставляет{' '}
-          <strong className="text-foreground">встроенный OPC UA сервер</strong> &mdash;
-          без дополнительных лицензий.
+          фондом OPC Foundation. KUKA предлагает{' '}
+          <strong className="text-foreground">KUKA.OPC UA Server</strong> &mdash; отдельный
+          лицензируемый технологический пакет с расширенным namespace для робота. С KSS&nbsp;8.6
+          в систему добавлен базовый bootstrap-namespace, но полная функциональность (методы,
+          события, security) &mdash; в платном пакете.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Стандартные nodes: положение робота (TCP, оси), состояние программы, регистры,
@@ -332,34 +362,16 @@ EKI_WAIT("ProdServer")
         </p>
       </motion.div>
 
-      {/* Quiz */}
-      <motion.div variants={fadeInItem}>
-        <Quiz
-          question="Минимальная типичная периодичность цикла KUKA RSI?"
-          options={[
-            {
-              text: '100 мс',
-              explanation: '100 мс — это уровень EKI или PLC-обмена, но не RSI.',
-            },
-            {
-              text: '50 мс',
-              explanation: '50 мс — характерная latency для EthernetKRL EKI, не для real-time RSI.',
-            },
-            {
-              text: '4–12 мс',
-              correct: true,
-              explanation:
-                'RSI работает с интерполяционным циклом 4–12 мс (зависит от версии и настроек), что делает его пригодным для real-time коррекций.',
-            },
-            {
-              text: '1 с',
-              explanation: '1 с — это уровень OPC UA / SCADA, не подходит для real-time коррекций траектории.',
-            },
-          ]}
-        />
-      </motion.div>
+      <Takeaways
+        items={[
+          'Слои интеграции по latency: RSI (4–12 мс, real-time) → EKI (50+ мс, TCP) → OPC UA (секунды, SCADA) → ROS (для симуляции и URDF).',
+          'RSI работает по UDP с фиксированным IPO-циклом; используется для force-control, vision-tracking, лазерного seam-tracking.',
+          'KUKA.OPC UA Server — лицензируемый пакет, не «бесплатно из коробки».',
+          'CREAD/CWRITE — legacy для последовательных каналов; в новых проектах вытесняется EKI.',
+        ]}
+      />
 
-      {/* DragDrop */}
+      {/* DragDrop — интеграционный обзор, остаётся ближе к концу */}
       <motion.div variants={fadeInItem}>
         <DragDrop
           instruction="Расположите слои интеграции от низкого (real-time) к высокому"

@@ -69,16 +69,16 @@ const questions: ExamQuestion[] = [
       'LIN P1 без флагов approximation проходит точно через P1; C_DIS включает сглаживание; PTP — траектория не линейная в декартовом пространстве.',
   },
   {
-    question: '5. Какой полевой стандарт НЕ поддерживается WorkVisual для IO-mapping штатно?',
+    question: '5. Заказчик требует подключить energy meter по Modbus TCP к WorkVisual-проекту KRC5. Какое решение корректно?',
     options: [
-      'PROFINET',
-      'EtherCAT',
-      'EtherNet/IP',
-      'Modbus TCP',
+      'Использовать встроенную поддержку Modbus TCP в WorkVisual',
+      'Установить отдельный технологический пакет KUKA для Modbus TCP, либо мостить трафик через PLC, у которого есть и Modbus, и PROFINET',
+      'Переделать energy meter под PROFINET — иначе никак',
+      'Modbus TCP в KUKA-ячейке невозможен в принципе',
     ],
-    correctIndex: 3,
+    correctIndex: 1,
     explanation:
-      'WorkVisual поддерживает PROFINET, PROFIBUS, EtherCAT, EtherNet/IP, DeviceNet, VARANBUS. Modbus TCP — нет (нужны отдельные технологические пакеты).',
+      'WorkVisual штатно поддерживает PROFINET, EtherCAT, EtherNet/IP, ProfiBus, DeviceNet — но не Modbus TCP. Решение: либо отдельный пакет (KUKA.EthernetIP/Modbus), либо PLC-шлюз: PLC принимает Modbus от energy meter и передаёт значения на робот по PROFINET.',
   },
   {
     question: '6. Что произошло с ISO/TS 15066 в 2025 году?',
@@ -86,11 +86,11 @@ const questions: ExamQuestion[] = [
       'Он отменён без замены',
       'Его требования к коллаборативным роботам интегрированы в новую редакцию ISO 10218-1:2025',
       'Преобразован в ISO 10218-3',
-      'Заменён ISO 9001',
+      'Стал частью ISO 13849-2',
     ],
     correctIndex: 1,
     explanation:
-      'В 2025 ISO 10218-1/-2 переизданы и поглотили большую часть ISO/TS 15066. Биомеханические лимиты для cobot теперь живут прямо в ISO 10218-1:2025.',
+      'В 2025 ISO 10218-1/-2 переизданы и поглотили большую часть ISO/TS 15066. Биомеханические лимиты для cobot теперь живут прямо в ISO 10218-1:2025. ISO 13849 — про функциональную безопасность систем управления, к биомеханике не относится.',
   },
   {
     question: '7. Какой пакет KUKA позволяет программировать робота из PLC без написания KRL-программы?',
@@ -105,16 +105,16 @@ const questions: ExamQuestion[] = [
       'mxAutomation предоставляет блоки FB для S7-1500 / 1200 / 300 / 400, программирование выполняется в TIA Portal. Робот в этом случае — slave, исполняет команды.',
   },
   {
-    question: '8. Минимальная типичная периодичность цикла KUKA RSI (Robot Sensor Interface)?',
+    question: '8. Vision-система обнаруживает деталь на конвейере и должна корректировать траекторию робота с латентностью не более 10 мс. Какой протокол выбрать?',
     options: [
-      '100 мс',
-      '50 мс',
-      '4–12 мс',
-      '1 с',
+      'EthernetKRL (EKI) — TCP-сокеты, простая настройка',
+      'OPC UA — стандарт для интеграции с SCADA',
+      'RSI (Robot Sensor Interface) — UDP-фреймы каждые 4–12 мс',
+      'CREAD/CWRITE — унаследованный канальный обмен',
     ],
     correctIndex: 2,
     explanation:
-      'RSI работает с интерполяционным циклом 4–12 мс (зависит от версии KSS и настроек RSI Object Configuration), что делает его пригодным для real-time коррекций.',
+      'RSI — единственный real-time протокол KUKA с гарантированным циклом 4–12 мс, укладывается в требование 10 мс. EKI — асинхронный TCP с latency 50+ мс. OPC UA — секунды. CREAD/CWRITE — legacy, не предсказуем по латентности.',
   },
   {
     question: '9. На каком языке программируется LBR iiwa в Sunrise.Workbench?',
@@ -129,16 +129,16 @@ const questions: ExamQuestion[] = [
       'Sunrise.OS использует Java (Eclipse-based Sunrise.Workbench с RoboticsAPI). KRL применяется для KRC4/KRC5, Sunrise — для LBR iiwa.',
   },
   {
-    question: '10. Какой свободный симулятор KUKA выдаётся в trial через my.kuka и поддерживает экспорт KRL?',
+    question: '10. Студенту нужно бесплатно потренироваться программировать KUKA дома, без доступа к реальному роботу. Какой инструмент выбрать?',
     options: [
-      'Gazebo',
-      'KUKA.Sim 4',
-      'RoboDK Free',
-      'V-REP',
+      'Gazebo с URDF из ros-industrial/kuka_experimental — для проверки геометрии и интеграции в ROS',
+      'KUKA.Sim 4 trial через my.kuka Marketplace — год бесплатно, поддерживает экспорт KRL',
+      'V-REP / CoppeliaSim — общий симулятор без специфики KUKA',
+      'KUKA.OfficeLite — единственный путь, виртуальный KRC',
     ],
     correctIndex: 1,
     explanation:
-      'KUKA.Sim 4 (на базе Visual Components) выдаётся trial-ключом через my.kuka Marketplace на 1 год. RoboDK — независимый продукт, не от KUKA.',
+      'KUKA.Sim 4 — самый прямой путь: год бесплатно через my.kuka, родная KUKA-среда, экспорт KRL на реальный контроллер. Gazebo и V-REP — общие симуляторы, не дают KRL-семантики. KUKA.OfficeLite — это виртуальный KRC, продаётся отдельно (платно).',
   },
   {
     question: '11. Зачем в проекте вводится система координат BASE поверх WORLD?',
@@ -165,16 +165,16 @@ const questions: ExamQuestion[] = [
       'P1, P2, P3 не объявлены в demo.dat (через DECL POS) и не обучены через SmartPAD — KSS не знает координат. $VEL.CP в м/с — нормально (0.3 м/с типичная Cartesian-скорость). HOME — стандартная глобальная точка KUKA в \\$config.dat.',
   },
   {
-    question: '13. Какая категория остановки применима в режиме T1 при отпускании enabling-switch на SmartPAD?',
+    question: '13. Оператор в режиме T1 мягко отпускает enabling-switch (а не сжимает в panic-grip). Какая категория остановки сработает?',
     options: [
-      'Cat 0 — немедленное снятие питания',
+      'Cat 0 — немедленное снятие питания, тормоз срабатывает после',
       'Cat 1 — управляемая остановка с сохранением питания до полной остановки, затем снятие питания',
       'Cat 2 — управляемая остановка без снятия питания',
       'Никакая остановка не срабатывает, только предупреждение',
     ],
     correctIndex: 1,
     explanation:
-      'В режиме T1 при отпускании enabling-switch SmartPAD срабатывает остановка категории 1 (программная управляемая остановка). Cat 0 — для emergency stop (более жёсткий). Cat 2 не разрешён как primary stop по новым редакциям ISO 10218 / EN 60204-1.',
+      'При мягком отпускании enabling-switch срабатывает Cat 1: контроллер активно тормозит, потом снимает питание. При panic-grip (резкое сжатие до упора) сработал бы Cat 0 (немедленное снятие). Cat 2 не разрешён по EN ISO 13850 как emergency stop.',
   },
   {
     question: '14. Минимальная архитектура связи KUKA-робота с внешним PC через RSI: какие два потока обмена данными работают?',

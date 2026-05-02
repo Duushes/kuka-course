@@ -10,6 +10,7 @@ import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
 import ScenarioCard from '@/components/ScenarioCard';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module6() {
@@ -74,6 +75,36 @@ export default function Module6() {
         </p>
       </motion.div>
 
+      {/* Quiz — сразу после блока «ISO 10218-1 / -2:2025» */}
+      <motion.div variants={fadeInItem}>
+        <Quiz
+          question="Что произошло с ISO/TS 15066 в 2025 году?"
+          options={[
+            {
+              text: 'Он отменён без замены',
+              explanation:
+                'Биомеханические требования к cobot слишком важны, чтобы их «отменить». Они только переехали в другой документ.',
+            },
+            {
+              text: 'Его требования к коллаборативным роботам интегрированы в новую редакцию ISO 10218-1:2025',
+              correct: true,
+              explanation:
+                'В 2025 ISO 10218-1/-2 переизданы и поглотили большую часть ISO/TS 15066. Теперь cobot-требования живут в одном документе.',
+            },
+            {
+              text: 'Преобразован в ISO 10218-3',
+              explanation:
+                'ISO 10218-3 не существует. Стандарт состоит из двух частей: -1 (для производителя) и -2 (для интегратора).',
+            },
+            {
+              text: 'Стал частью ISO 13849-2',
+              explanation:
+                'ISO 13849 — про функциональную безопасность систем управления (Performance Level), а не про cobot-биомеханику. Содержательно эти документы не пересекаются.',
+            },
+          ]}
+        />
+      </motion.div>
+
       {/* Теория 2: ISO 13849 */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
         <h2 className="text-xl font-semibold mb-4">EN ISO 13849-1 &mdash; функциональная безопасность</h2>
@@ -125,11 +156,29 @@ export default function Module6() {
           </li>
           <li>
             <strong className="text-foreground">Cat 2</strong> &mdash; управляемая остановка{' '}
-            <em>без</em> снятия питания: приводы остаются под напряжением. По новым редакциям
-            стандартов Cat 2 не разрешён как primary stop &mdash; для emergency обязателен
-            Cat 0 или Cat 1.
+            <em>без</em> снятия питания: приводы остаются под напряжением.{' '}
+            <strong className="text-foreground">Для emergency stop</strong> (E-stop) Cat 2{' '}
+            <em>не разрешён</em> по EN&nbsp;ISO&nbsp;13850 &mdash; обязательны Cat 0 или Cat 1.
+            Как обычная operational-остановка (например, по концевику) Cat 2 допустим.
           </li>
         </ul>
+      </motion.div>
+
+      {/* DragDrop — сразу после блока «Категории остановок (EN 60204-1)» */}
+      <motion.div variants={fadeInItem}>
+        <DragDrop
+          instruction="Сопоставьте категорию остановки с её описанием"
+          items={[
+            { id: 'cat0', text: 'Немедленное снятие питания приводов; тормоз срабатывает после' },
+            { id: 'cat1', text: 'Управляемая остановка с сохранением питания до полной остановки, затем снятие' },
+            { id: 'cat2', text: 'Управляемая остановка без снятия питания (приводы остаются под напряжением)' },
+          ]}
+          zones={[
+            { id: 'zCat0', label: 'Cat 0', acceptIds: ['cat0'] },
+            { id: 'zCat1', label: 'Cat 1', acceptIds: ['cat1'] },
+            { id: 'zCat2', label: 'Cat 2', acceptIds: ['cat2'] },
+          ]}
+        />
       </motion.div>
 
       {/* Теория 4: SafeOperation */}
@@ -277,44 +326,16 @@ export default function Module6() {
         </p>
       </motion.div>
 
-      {/* Quiz */}
-      <motion.div variants={fadeInItem}>
-        <Quiz
-          question="Что произошло с ISO/TS 15066 в 2025 году?"
-          options={[
-            { text: 'Он отменён без замены' },
-            {
-              text: 'Его требования к коллаборативным роботам интегрированы в новую редакцию ISO 10218-1:2025',
-              correct: true,
-              explanation:
-                'В 2025 ISO 10218-1/-2 переизданы и поглотили большую часть ISO/TS 15066. Теперь cobot-требования живут в одном документе.',
-            },
-            { text: 'Преобразован в ISO 10218-3' },
-            { text: 'Заменён ISO 9001' },
-          ]}
-        />
-      </motion.div>
+      <Takeaways
+        items={[
+          'Безопасность робота — это пирамида: ISO 10218 (стандарт) + железо (e-stop, enabling, ESC) + софт (SafeOperation).',
+          'ISO 10218-1/-2:2025 поглотил ISO/TS 15066 — биомеханические требования к cobot теперь в одном документе.',
+          'Категории остановок (EN 60204-1): Cat 0 (немедленное снятие питания), Cat 1 (управляемое торможение, потом снятие), Cat 2 (без снятия — недопустимо для emergency stop).',
+          'У LBR iiwa встроены torque-сенсоры в каждом суставе; у промышленных KR — защита через safe zones SafeOperation.',
+        ]}
+      />
 
-      {/* DragDrop */}
-      <motion.div variants={fadeInItem}>
-        <DragDrop
-          instruction="Сопоставьте категорию остановки с её описанием"
-          items={[
-            { id: 'cat0', text: 'Немедленное снятие питания приводов; тормоз срабатывает после' },
-            { id: 'cat1', text: 'Управляемая остановка с сохранением питания до полной остановки, затем снятие' },
-            { id: 'cat2', text: 'Управляемая остановка без снятия питания (приводы остаются под напряжением)' },
-            { id: 'sos', text: 'Safe Operating Stop — мониторится положение, питание сохранено' },
-          ]}
-          zones={[
-            { id: 'zCat0', label: 'Cat 0', acceptIds: ['cat0'] },
-            { id: 'zCat1', label: 'Cat 1', acceptIds: ['cat1'] },
-            { id: 'zCat2', label: 'Cat 2', acceptIds: ['cat2'] },
-            { id: 'zSos', label: 'SOS', acceptIds: ['sos'] },
-          ]}
-        />
-      </motion.div>
-
-      {/* ScenarioCard */}
+      {/* ScenarioCard — финальный apply, привязан к cobot-биомеханике */}
       <motion.div variants={fadeInItem}>
         <ScenarioCard
           scenario="Cobot LBR iiwa задел человека за плечо при выполнении pick-and-place. Какой stop сработал?"
@@ -327,9 +348,9 @@ export default function Module6() {
               score: 0,
             },
             {
-              text: 'B) Soft stop — биомеханический сенсор зафиксировал силу выше лимита (~65 Н по ISO/TS 15066 для плеча, transient), сработал Cat 1 + power-protective stop',
+              text: 'B) Joint torque-сенсоры в каждом суставе детектировали внешнюю силу выше порога (~65 Н quasi-static / ~150 Н transient для плеча по ISO/TS 15066), сработал protective stop (Safety-Stop 1, аналог Cat 1)',
               outcome:
-                'Верно. LBR iiwa имеет силомоментные сенсоры в каждом из семи суставов и срабатывает на превышение биомеханических лимитов. Это специфика cobot — у промышленного KR QUANTEC такой защиты нет, он опирается на safe zones из SafeOperation.',
+                'Верно. LBR iiwa имеет torque-сенсоры в каждом из семи суставов; контроллер по их показаниям вычисляет внешнюю силу контакта. При превышении сконфигурированного порога робот переходит в protective stop. Это специфика cobot — у промышленного KR QUANTEC такой защиты нет, он опирается на safe zones из SafeOperation.',
               score: 2,
             },
             {

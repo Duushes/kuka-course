@@ -9,6 +9,7 @@ import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
 import InputExercise from '@/components/InputExercise';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module3() {
@@ -80,11 +81,13 @@ export default function Module3() {
           </li>
         </ul>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          Иерархия в KUKA выглядит так: <em>WORLD &rarr; ROBROOT &rarr; FLANGE &rarr; TOOL</em>;
-          BASE &mdash; отдельное ответвление от&nbsp;WORLD, привязанное к&nbsp;детали или
-          приспособлению. KSS постоянно держит цепочку преобразований в&nbsp;памяти, поэтому
-          одну&nbsp;и&nbsp;ту&nbsp;же позицию TCP можно показать оператору хоть в&nbsp;BASE, хоть
-          в&nbsp;WORLD.
+          Иерархия в KUKA выглядит так:{' '}
+          <em>WORLD &rarr; ROBROOT &rarr; A1&hellip;A6 (кинематика манипулятора) &rarr; FLANGE &rarr; TOOL (TCP)</em>.
+          Углы шести осей переводят основание робота в положение фланца, дальше TOOL даёт
+          смещение до TCP. BASE &mdash; пользовательская система отсчёта, привязанная к&nbsp;WORLD
+          (а не «параллельная»): она используется только как удобная точка отсчёта для координат
+          в&nbsp;программе. KSS держит всю цепочку преобразований в&nbsp;памяти, поэтому одну&nbsp;и&nbsp;ту&nbsp;же
+          позицию TCP можно показать оператору хоть в&nbsp;BASE, хоть в&nbsp;WORLD.
         </p>
       </motion.div>
 
@@ -186,6 +189,27 @@ export default function Module3() {
         </p>
       </motion.div>
 
+      {/* DragDrop — сразу после SVG-схемы систем координат */}
+      <motion.div variants={fadeInItem}>
+        <DragDrop
+          instruction="Сопоставьте систему координат KUKA с её ролью в ячейке."
+          items={[
+            { id: 'world', text: 'WORLD' },
+            { id: 'robroot', text: 'ROBROOT' },
+            { id: 'base', text: 'BASE' },
+            { id: 'tool', text: 'TOOL' },
+            { id: 'flange', text: 'FLANGE' },
+          ]}
+          zones={[
+            { id: 'world-zone', label: 'Базовая система отсчёта, фиксированная в пространстве цеха', acceptIds: ['world'] },
+            { id: 'robroot-zone', label: 'Точка крепления робота к полу или постаменту', acceptIds: ['robroot'] },
+            { id: 'base-zone', label: 'Положение и ориентация заготовки или палета (можно сдвинуть)', acceptIds: ['base'] },
+            { id: 'tool-zone', label: 'Инструмент на фланце (захват, сварочная горелка)', acceptIds: ['tool'] },
+            { id: 'flange-zone', label: 'Шестая ось — физический фланец без инструмента', acceptIds: ['flange'] },
+          ]}
+        />
+      </motion.div>
+
       {/* TCP подробнее */}
       <motion.div variants={fadeInItem} className="mb-10">
         <h2 className="text-xl font-semibold mb-4">TCP &mdash; единственная точка, которая важна программе</h2>
@@ -241,7 +265,7 @@ export default function Module3() {
         </div>
       </motion.div>
 
-      {/* Quiz */}
+      {/* Quiz — сразу после блока «Три ритуала калибровки KUKA» */}
       <motion.div variants={fadeInItem}>
         <Quiz
           question="Какая операция используется для калибровки TCP методом XYZ 4-Point?"
@@ -267,26 +291,39 @@ export default function Module3() {
         />
       </motion.div>
 
-      {/* DragDrop */}
-      <motion.div variants={fadeInItem}>
-        <DragDrop
-          instruction="Сопоставьте систему координат KUKA с её ролью в ячейке."
-          items={[
-            { id: 'world', text: 'WORLD' },
-            { id: 'robroot', text: 'ROBROOT' },
-            { id: 'base', text: 'BASE' },
-            { id: 'tool', text: 'TOOL' },
-            { id: 'flange', text: 'FLANGE' },
-          ]}
-          zones={[
-            { id: 'world-zone', label: 'Базовая система отсчёта, фиксированная в пространстве цеха', acceptIds: ['world'] },
-            { id: 'robroot-zone', label: 'Точка крепления робота к полу или постаменту', acceptIds: ['robroot'] },
-            { id: 'base-zone', label: 'Положение и ориентация заготовки или палета (можно сдвинуть)', acceptIds: ['base'] },
-            { id: 'tool-zone', label: 'Инструмент на фланце (захват, сварочная горелка)', acceptIds: ['tool'] },
-            { id: 'flange-zone', label: 'Шестая ось — физический фланец без инструмента', acceptIds: ['flange'] },
-          ]}
-        />
+      {/* Mastering */}
+      <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
+        <h2 className="text-xl font-semibold mb-4">Mastering &mdash; «обнуление» осей</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          До любых калибровок TCP и BASE робот должен <strong className="text-foreground">знать
+          свои нулевые положения по осям</strong> A1&hellip;A6. Эту привязку к эталону
+          называют <strong className="text-foreground">Mastering</strong> (юстировка). Без
+          него вся кинематика «уезжает»: TCP в WORLD будет вычисляться неверно, программа
+          поедет криво, и&nbsp;даже идеально откалиброванный инструмент будет промахиваться.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mt-4">
+          Делается с помощью прибора <strong className="text-foreground">EMD</strong>{' '}
+          (Electronic Mastering Device) или dial gauge: оператор подводит каждую ось в
+          mastering-position по эталонной риске, KSS запоминает её как ноль. Запускается
+          через <em>SmartPAD &rarr; Start-up &rarr; Master &rarr; EMD</em>.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mt-4">
+          Mastering нужен после: ввода в эксплуатацию, замены мотора, замены RDC, удара
+          манипулятора. Раз сделано &mdash; держится годами, пока механика не нарушена.
+          Если робот при пуске «думает», что находится в одной точке, а физически в другой
+          &mdash; первое подозрение всегда на потерянный mastering.
+        </p>
       </motion.div>
+
+      <Takeaways
+        items={[
+          'TCP (Tool Center Point) — кончик инструмента. Все программы движений описывают траекторию TCP.',
+          'Иерархия систем: WORLD → ROBROOT → A1…A6 → FLANGE → TOOL (TCP). BASE — пользовательская система отсчёта от WORLD, удобная для привязки к заготовке.',
+          'Калибровки: TCP — XYZ 4-Point + ABC 2-Point; BASE — 3-Point (origin + X + точка XY). Без калибровки координаты «уезжают».',
+          'Mastering — привязка нулевых положений осей через EMD. Нужен после ввода в работу, замены мотора/RDC, удара. Без него вся кинематика неверна.',
+          'FK однозначна, IK имеет несколько решений; KUKA выбирает однозначно через status (S) и turn (T) в типе POS.',
+        ]}
+      />
 
       {/* FK / IK */}
       <motion.div variants={fadeInItem} className="mb-10">
@@ -327,7 +364,13 @@ export default function Module3() {
           prompt="Что произойдёт, если сместить BASE на 10 мм по оси X, не трогая программу?"
           placeholder="Опишите, что увидит оператор..."
           hint="BASE — это система координат, относительно которой описаны точки в программе. Подумайте, куда они &laquo;уедут&raquo; после сдвига BASE."
-          validate={(v) => /(точк|програм|сместит|координат|10|мм)/i.test(v) && v.trim().length > 15}
+          validate={(v) => {
+            const trimmed = v.trim();
+            if (trimmed.length < 25) return false;
+            const movesPoints = /(сместит|сдвин|переместит|поедет|уед|переедет|сместятс)/i.test(trimmed);
+            const aboutProgram = /(точк|програм|траектор)/i.test(trimmed);
+            return movesPoints && aboutProgram;
+          }}
           successMessage="Верно — все точки программы сместятся на 10 мм по X."
           exampleAnswer="Все траектории программы сместятся на 10 мм по X относительно цеха, потому что точки описаны в BASE. Сама программа не меняется — меняется лишь система отсчёта, в которой эти точки оживают."
         />

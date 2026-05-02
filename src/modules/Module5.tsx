@@ -8,6 +8,7 @@ import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
 import DragDrop from '@/components/DragDrop';
 import ScenarioCard from '@/components/ScenarioCard';
+import Takeaways from '@/components/Takeaways';
 import { motion } from 'framer-motion';
 
 export default function Module5() {
@@ -63,10 +64,10 @@ export default function Module5() {
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Версии важны для совместимости:{' '}
-          <strong className="text-foreground">WorkVisual&nbsp;5.x</strong> &mdash;
-          для KRC4, <strong className="text-foreground">WorkVisual&nbsp;6.x</strong>{' '}
-          &mdash; для KRC5. Перепутать нельзя: 6.x не задеплоится на KRC4 и
-          наоборот.
+          <strong className="text-foreground">WorkVisual&nbsp;5.x</strong> работает
+          только с KRC4. <strong className="text-foreground">WorkVisual&nbsp;6.x</strong>{' '}
+          &mdash; и с KRC4 (KSS&nbsp;8.5 и новее), и с KRC5. На сегодня актуальная
+          ветка &mdash; 6.x; используйте свежую версию WV под целевой KSS.
         </p>
       </motion.div>
 
@@ -126,8 +127,11 @@ export default function Module5() {
           <li>
             <strong className="text-foreground">T2 &mdash; Manual high velocity</strong>:
             ручной режим на полной программной скорости. Используется для
-            тестирования траектории. Оператор обязан быть особенно внимателен:
-            движение быстрое, защитный барьер обычно открыт.
+            визуальной проверки траектории. На современных установках в ЕС T2
+            часто <strong className="text-foreground">отключают на этапе ввода
+            в эксплуатацию</strong> по требованиям ISO&nbsp;10218-1:2025. Если T2
+            активен &mdash; защитный барьер замкнут, оператор находится в безопасной
+            зоне снаружи ограждения.
           </li>
           <li>
             <strong className="text-foreground">AUT &mdash; Automatic</strong>:
@@ -257,19 +261,40 @@ export default function Module5() {
         </p>
       </motion.div>
 
+      <Takeaways
+        items={[
+          'Workflow в WorkVisual: New project → Add controller → Configure fieldbus → IO mapping → Activate.',
+          'WorkVisual 6.x работает с KRC4 (KSS 8.5+) и KRC5; 5.x — только с KRC4.',
+          'SmartPAD — ключ режимов (T1 / T2 / AUT / EXT) + enabling switch. Без удержания enabling в среднем положении T1/T2 не двигают робота.',
+          'Touch Up в JOG-режиме автоматически добавляет DECL POS в .dat.',
+        ]}
+      />
+
       {/* Quiz */}
       <motion.div variants={fadeInItem}>
         <Quiz
           question="Какой полевой стандарт НЕ поддерживается WorkVisual для IO-mapping штатно?"
           options={[
-            { text: 'PROFINET' },
-            { text: 'EtherCAT' },
-            { text: 'EtherNet/IP' },
+            {
+              text: 'PROFINET',
+              explanation:
+                'PROFINET — основной выбор Siemens-окружения. WorkVisual поддерживает штатно.',
+            },
+            {
+              text: 'EtherCAT',
+              explanation:
+                'EtherCAT — стандарт Beckhoff и многих робототехнических ячеек. WorkVisual поддерживает штатно.',
+            },
+            {
+              text: 'EtherNet/IP',
+              explanation:
+                'EtherNet/IP — стандарт Allen-Bradley / Rockwell. WorkVisual поддерживает штатно.',
+            },
             {
               text: 'Modbus TCP',
               correct: true,
               explanation:
-                'WorkVisual поддерживает PROFINET, PROFIBUS, EtherCAT, EtherNet/IP, DeviceNet, VARANBUS. Modbus TCP — нет (нужны отдельные технологические пакеты).',
+                'WorkVisual штатно поддерживает PROFINET, PROFIBUS, EtherCAT, EtherNet/IP, DeviceNet. Для Modbus TCP нужен отдельный технологический пакет.',
             },
           ]}
         />
