@@ -33,10 +33,13 @@ export default function Module1() {
           или интеграцию робота с <strong className="text-foreground">PLC</strong>{' '}
           <span className="text-muted-foreground/70">(Programmable Logic Controller, промышленный контроллер)</span>,
           полезно понять, <em>с кем именно</em> вы работаете. KUKA &mdash; не один робот,
-          а целая линейка от компактных 6-осевых моделей до тяжёлых{' '}
-          <strong className="text-foreground">foundry</strong>{' '}
-          <span className="text-muted-foreground/70">(литейное производство)</span>-манипуляторов
-          и единственного в семействе коллаборативного <strong className="text-foreground">LBR&nbsp;iiwa</strong>.
+          а целая линейка от компактных 6-осевых моделей до тяжёлых манипуляторов
+          для <strong className="text-foreground">литейного производства</strong>{' '}
+          <span className="text-muted-foreground/70">(foundry)</span>{' '}
+          и единственного в семействе{' '}
+          <strong className="text-foreground">коллаборативного робота</strong>{' '}
+          <span className="text-muted-foreground/70">(cobot &mdash; от collaborative robot, безопасен для работы рядом с человеком)</span>{' '}
+          LBR&nbsp;iiwa.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           В этом модуле мы разложим линейку по полочкам: какая серия для каких задач,
@@ -56,11 +59,13 @@ export default function Module1() {
           Midea Group, что заметно усилило её позиции на азиатском рынке.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          По установленной базе KUKA удерживает третье место в мире после FANUC и ABB.
-          Около половины выручки приходится на <em>automotive</em>{' '}
-          <span className="text-muted-foreground/70">(автомобильное производство)</span> &mdash;
+          По <strong className="text-foreground">установленной базе</strong>{' '}
+          <span className="text-muted-foreground/70">(installed base &mdash; число роботов в эксплуатации)</span>{' '}
+          KUKA удерживает третье место в мире после FANUC и ABB.
+          Около половины выручки приходится на <strong className="text-foreground">автомобильное производство</strong>{' '}
+          <span className="text-muted-foreground/70">(automotive)</span> &mdash;
           KUKA исторически сильна в кузовных линиях BMW, Mercedes-Benz, Volkswagen. В России среди крупных клиентов:
-          Sollers, КамАЗ, ОДК, ряд предприятий металлообработки и foundry.
+          Sollers, КамАЗ, ОДК, ряд предприятий металлообработки и литейного производства.
         </p>
       </motion.div>
 
@@ -69,8 +74,8 @@ export default function Module1() {
         <h2 className="text-xl font-semibold mb-4">Линейка роботов: от AGILUS до FORTEC</h2>
         <p className="text-muted-foreground leading-relaxed mb-6">
           KUKA не делает &laquo;универсального робота&raquo;. Каждая серия закрывает свой
-          диапазон по <strong className="text-foreground">payload</strong>{' '}
-          <span className="text-muted-foreground/70">(полезная нагрузка робота, максимальный вес инструмента и объекта)</span>{' '}
+          диапазон по <strong className="text-foreground">грузоподъёмности</strong>{' '}
+          <span className="text-muted-foreground/70">(payload &mdash; максимальный вес инструмента и объекта на фланце)</span>{' '}
           и типичным сценариям. Запомнить пять-шесть имён достаточно,
           чтобы ориентироваться в 90% запросов от заказчиков.
         </p>
@@ -139,42 +144,46 @@ export default function Module1() {
               <line x1="462" y1="63" x2="462" y2="50" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" />
               <circle cx="462" cy="49" r="2.5" fill="var(--accent)" />
               <text x="449" y="148" textAnchor="middle" fontSize="10" fill="var(--accent)" fontWeight="600">LBR iiwa</text>
-              <text x="449" y="158" textAnchor="middle" fontSize="8" fill="var(--accent)" opacity="0.7">7/14 кг, cobot</text>
+              <text x="449" y="158" textAnchor="middle" fontSize="8" fill="var(--accent)" opacity="0.7">7/14 кг, коллаб.</text>
             </g>
           </svg>
           <p className="text-xs text-muted-foreground mt-3 text-center">
-            Силуэты не в масштабе &mdash; задача показать рост payload и геометрии слева направо.
+            Силуэты не в масштабе &mdash; задача показать рост грузоподъёмности и геометрии слева направо.
           </p>
         </div>
 
         <ul className="space-y-3 text-muted-foreground leading-relaxed">
           <li>
             <strong className="text-foreground">KR&nbsp;AGILUS</strong> &mdash; компактные 6-осевые
-            роботы с payload 6&ndash;10 кг. Ставка на скорость и точность: мелкая сборка, упаковка,
-            обслуживание станков.
+            роботы грузоподъёмностью 6&ndash;10&nbsp;кг. Ставка на скорость и точность: мелкая сборка,
+            упаковка, обслуживание станков.
           </li>
           <li>
             <strong className="text-foreground">KR&nbsp;CYBERTECH</strong> &mdash; средний класс,
-            payload 8&ndash;22 кг. Универсальные задачи: дуговая сварка, manipulating, hand-off.
+            грузоподъёмность 8&ndash;22&nbsp;кг. Универсальные задачи: дуговая сварка, перемещение
+            заготовок, передача между постами.
           </li>
           <li>
             <strong className="text-foreground">KR&nbsp;QUANTEC</strong> &mdash; тяжёлый класс,
-            payload 90&ndash;300 кг. Точечная сварка, обработка металла, палеттирование &mdash;
-            рабочая лошадка automotive.
+            грузоподъёмность 90&ndash;300&nbsp;кг. Точечная сварка, обработка металла, палеттирование &mdash;
+            рабочая лошадка автомобильных линий.
           </li>
           <li>
             <strong className="text-foreground">KR&nbsp;FORTEC ULTRA</strong> &mdash; экстра-тяжёлый,
-            payload 360&ndash;800 кг. Foundry, пресс-линии, перенос крупных кузовных деталей.
+            грузоподъёмность 360&ndash;800&nbsp;кг. Литейное производство, пресс-линии, перенос
+            крупных кузовных деталей.
           </li>
           <li>
-            <strong className="text-foreground">LBR&nbsp;iiwa</strong> (Light-weight intelligent
-            industrial work&nbsp;assistant) &mdash; единственный коллаборативный 7-осевой робот
-            с силомоментными сенсорами в каждом суставе. Payload 7 или 14 кг, программируется
-            на Java через Sunrise.OS.
+            <strong className="text-foreground">LBR&nbsp;iiwa</strong>{' '}
+            <span className="text-muted-foreground/70">(Light-weight intelligent industrial work assistant &mdash; «лёгкий интеллектуальный робот-помощник»)</span>{' '}
+            &mdash; единственный коллаборативный 7-осевой робот с силомоментными сенсорами в каждом
+            суставе. Грузоподъёмность 7 или 14&nbsp;кг, программируется на Java через Sunrise.OS.
           </li>
           <li>
             <strong className="text-foreground">KMR&nbsp;iiwa</strong> &mdash; мобильная платформа:
-            AGV KUKA omniMove с установленным сверху LBR&nbsp;iiwa. Ездит и манипулирует
+            самоходная тележка <strong className="text-foreground">AGV</strong>{' '}
+            <span className="text-muted-foreground/70">(Automated Guided Vehicle)</span>{' '}
+            KUKA&nbsp;omniMove с установленным сверху LBR&nbsp;iiwa. Ездит и манипулирует
             одновременно &mdash; редкий зверь на рынке.
           </li>
         </ul>
@@ -182,8 +191,8 @@ export default function Module1() {
 
       <Takeaways
         items={[
-          'KUKA — один из «большой четвёрки» промышленных роботов (с ABB, FANUC, Yaskawa Motoman); № 3 в мире по installed base.',
-          'Линейка по payload: AGILUS (6–10 кг) → CYBERTECH (8–22) → QUANTEC (90–300) → FORTEC (360–1300). LBR iiwa — единственный cobot.',
+          'KUKA — один из «большой четвёрки» промышленных роботов (с ABB, FANUC, Yaskawa Motoman); № 3 в мире по числу роботов в эксплуатации (installed base).',
+          'Линейка по грузоподъёмности: AGILUS (6–10 кг) → CYBERTECH (8–22) → QUANTEC (90–300) → FORTEC (360–1300). LBR iiwa — единственный коллаборативный робот (cobot).',
           'Робот не работает в одиночку: типичная ячейка = робот + PLC + сенсоры + конвейер + safety-PLC. KUKA даёт пакеты для интеграции (WorkVisual, KUKA.Sim, mxAutomation).',
         ]}
       />
@@ -205,18 +214,17 @@ export default function Module1() {
       <motion.div variants={fadeInItem} className="mb-10">
         <h2 className="text-xl font-semibold mb-4">Место на рынке и в индустриях</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          KUKA исторически &laquo;сидит&raquo; в трёх ключевых вертикалях: <em>automotive</em>
-          (точечная и дуговая сварка кузовов, hand-off деталей, палеттирование),
-          <em> металлообработка</em> (загрузка/выгрузка станков, обслуживание прессов)
-          и <em>foundry</em> (литейные операции, заливка форм, обращение с горячими заготовками).
+          KUKA исторически &laquo;сидит&raquo; в трёх ключевых вертикалях:{' '}
+          <em>автомобильное производство</em> (точечная и дуговая сварка кузовов,
+          передача деталей между постами, палеттирование),{' '}
+          <em>металлообработка</em> (загрузка/выгрузка станков, обслуживание прессов)
+          и <em>литейное производство</em> (заливка форм, обращение с горячими заготовками).
         </p>
         <p className="text-muted-foreground leading-relaxed">
           В последние годы компания агрессивно идёт в <strong className="text-foreground">логистику</strong>
           {' '}и <strong className="text-foreground">медицинские применения</strong>:
           KMR iiwa в больничных лабораториях, LBR iiwa &mdash; в сборке электроники
-          бок о бок с операторами. Это объясняет, почему ставку на{' '}
-          <strong className="text-foreground">cobot</strong>{' '}
-          <span className="text-muted-foreground/70">(коллаборативный робот, безопасный для работы рядом с человеком)</span>-серию
+          бок о бок с операторами. Это объясняет, почему ставку на коллаборативную серию
           делают даже там, где раньше был чисто индустриальный сегмент.
         </p>
       </motion.div>
@@ -232,10 +240,10 @@ export default function Module1() {
             { id: 'kmr', text: 'KMR iiwa' },
           ]}
           zones={[
-            { id: 'small', label: 'Мелкая сборка, payload до 10 кг', acceptIds: ['agilus'] },
-            { id: 'heavy', label: 'Тяжёлый payload 90–300 кг, automotive', acceptIds: ['quantec'] },
+            { id: 'small', label: 'Мелкая сборка, грузоподъёмность до 10 кг', acceptIds: ['agilus'] },
+            { id: 'heavy', label: 'Тяжёлая грузоподъёмность 90–300 кг, автомобильные линии', acceptIds: ['quantec'] },
             { id: 'cobot', label: 'Коллаборативная работа рядом с человеком', acceptIds: ['iiwa'] },
-            { id: 'mobile', label: 'Мобильная платформа: AGV + манипулятор', acceptIds: ['kmr'] },
+            { id: 'mobile', label: 'Мобильная платформа: самоходная тележка + манипулятор', acceptIds: ['kmr'] },
           ]}
         />
       </motion.div>
@@ -255,13 +263,13 @@ export default function Module1() {
         </p>
         <ul className="space-y-2 text-muted-foreground leading-relaxed">
           <li>
-            <strong className="text-foreground">KUKA.WorkVisual</strong> &mdash; engineering-среда:
-            конфигурация контроллера, mapping I/O, профили безопасности.
+            <strong className="text-foreground">KUKA.WorkVisual</strong> &mdash; инженерная среда:
+            конфигурация контроллера, привязка сигналов ввода-вывода, профили безопасности.
           </li>
           <li>
             <strong className="text-foreground">KUKA.Sim</strong>{' '}
-            <span className="text-muted-foreground/70">(симулятор KUKA для офлайн-программирования)</span> &mdash;
-            offline-симулятор для отладки траекторий и расчёта такта без реального робота.
+            <span className="text-muted-foreground/70">(симулятор KUKA для автономного программирования)</span> &mdash;
+            автономный симулятор для отладки траекторий и расчёта такта без реального робота.
           </li>
           <li>
             <strong className="text-foreground">KUKA.mxAutomation</strong>{' '}
@@ -280,22 +288,22 @@ export default function Module1() {
           options={[
             {
               text: 'A) KR AGILUS',
-              outcome: 'Не подходит: payload AGILUS до 10 кг, 30-килограммовую коробку он просто не поднимет. Это робот для мелкой сборки и упаковки.',
+              outcome: 'Не подходит: грузоподъёмность AGILUS до 10 кг, 100-килограммовую коробку он просто не поднимет. Это робот для мелкой сборки и упаковки.',
               score: 0,
             },
             {
               text: 'B) KR QUANTEC',
-              outcome: 'Верно. KR QUANTEC закрывает payload 90–300 кг с большим запасом и считается классическим выбором для палеттирования и automotive-задач. Доступен, отлажен, недорог в обслуживании.',
+              outcome: 'Верно. KR QUANTEC закрывает грузоподъёмность 90–300 кг с большим запасом и считается классическим выбором для палеттирования и задач автомобильного производства. Доступен, отлажен, недорог в обслуживании.',
               score: 1,
             },
             {
               text: 'C) LBR iiwa',
-              outcome: 'Технически потянет (есть версия 14 кг — впритык), но это cobot: дороже, медленнее на длинной траектории и избыточен для огороженного поста, где не нужно работать рядом с человеком.',
+              outcome: 'Технически не потянет (максимум 14 кг). К тому же это коллаборативный робот: дороже, медленнее на длинной траектории и избыточен для огороженного поста, где не нужно работать рядом с человеком.',
               score: 0,
             },
             {
               text: 'D) KMR iiwa',
-              outcome: 'Мобильность здесь не нужна — пост стационарный. Платить за AGV-базу нет смысла, к тому же payload ограничен возможностями LBR iiwa сверху.',
+              outcome: 'Мобильность здесь не нужна — пост стационарный. Платить за самоходную тележку нет смысла, к тому же грузоподъёмность ограничена возможностями LBR iiwa сверху (до 14 кг).',
               score: 0,
             },
           ]}

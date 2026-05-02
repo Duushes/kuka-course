@@ -1,9 +1,9 @@
 'use client';
 
 // Module 9 — Sunrise.OS, симуляция, диагностика: отдельная экосистема KUKA
-// для cobot LBR iiwa (Java + Sunrise.Workbench + RoboticsAPI), офлайн-симуляция
-// через KUKA.Sim 4 (на базе Visual Components), troubleshooting через SmartPAD
-// и базу знаний Xpert.
+// для коллаборативного робота LBR iiwa (Java + Sunrise.Workbench + RoboticsAPI),
+// автономная симуляция через KUKA.Sim 4 (на базе Visual Components),
+// диагностика и устранение неполадок через SmartPAD и базу знаний Xpert.
 
 import ModuleWrapper, { fadeInItem } from '@/components/ModuleWrapper';
 import Quiz from '@/components/Quiz';
@@ -17,7 +17,7 @@ export default function Module9() {
     <ModuleWrapper
       moduleIndex={9}
       title="Sunrise.OS, симуляция, диагностика"
-      subtitle="LBR iiwa на Java + KUKA.Sim + troubleshooting"
+      subtitle="LBR iiwa на Java + KUKA.Sim + диагностика"
       readingList={[
         { title: 'IFL-CAMP/iiwa_stack (GitHub)', url: 'https://github.com/IFL-CAMP/iiwa_stack' },
         { title: 'KUKA.Sim 4 — product page', url: 'https://www.kuka.com/en-us/products/robotics-systems/software/simulation-planning-optimization/kuka_sim' },
@@ -36,7 +36,7 @@ export default function Module9() {
           другая ОС, другой язык программирования.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          Параллельно для офлайн-планирования есть{' '}
+          Параллельно для автономного планирования есть{' '}
           <strong className="text-foreground">KUKA.Sim 4</strong> (на базе Visual
           Components), а для разбора ошибок &mdash; портал{' '}
           <strong className="text-foreground">Xpert</strong> с описанием каждого
@@ -48,12 +48,12 @@ export default function Module9() {
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
         <h2 className="text-xl font-semibold mb-4">Sunrise.OS и Sunrise.Workbench</h2>
         <p className="text-muted-foreground leading-relaxed">
-          <strong className="text-foreground">Sunrise.OS</strong> &mdash; full
-          Linux + RT-extension от KUKA, отдельная платформа для cobot LBR iiwa.
-          Программируется на{' '}
-          <strong className="text-foreground">Java</strong> через{' '}
+          <strong className="text-foreground">Sunrise.OS</strong> &mdash; полный
+          Linux с расширением реального времени (RT-extension) от KUKA, отдельная
+          платформа для коллаборативного робота (cobot) LBR iiwa. Программируется
+          на <strong className="text-foreground">Java</strong> через{' '}
           <strong className="text-foreground">Sunrise.Workbench</strong> &mdash;
-          Eclipse-based IDE (по аналогии с WorkVisual для KRC).
+          среду разработки на базе Eclipse (по аналогии с WorkVisual для KRC).
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Основное API &mdash;{' '}
@@ -67,7 +67,7 @@ export default function Module9() {
           <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Thread</code>-классы
           и синхронизацию), имеет нативную поддержку{' '}
           <strong className="text-foreground">силомоментных операций</strong>{' '}
-          (impedance control).
+          (управление с импедансом, impedance control).
         </p>
         <pre className="font-mono text-xs p-4 rounded-lg bg-card border border-border/50 overflow-x-auto mt-4">{`// Sunrise.Java — типовой паттерн RoboticsAPI
 @Override
@@ -91,8 +91,8 @@ public void run() {
           </li>
           <li>
             <strong className="text-foreground">Парадигма:</strong> KRL &mdash;
-            процедурный, Pascal-like; Sunrise &mdash; объектно-ориентированная Java
-            с многопоточностью и стандартными библиотеками JVM.
+            процедурный, в стиле Pascal; Sunrise &mdash; объектно-ориентированная
+            Java с многопоточностью и стандартными библиотеками JVM.
           </li>
           <li>
             <strong className="text-foreground">Файлы и типы:</strong> KRL хранит
@@ -105,7 +105,7 @@ public void run() {
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Frame</code>{' '}
             и{' '}
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">JointPosition</code>{' '}
-            в Application Data.
+            в данных приложения (Application Data).
           </li>
           <li>
             <strong className="text-foreground">Команды движения:</strong> KRL &mdash;{' '}
@@ -124,12 +124,12 @@ public void run() {
 
       {/* Теория 3: KUKA.Sim 4 */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
-        <h2 className="text-xl font-semibold mb-4">KUKA.Sim 4 &mdash; офлайн-программирование</h2>
+        <h2 className="text-xl font-semibold mb-4">KUKA.Sim 4 &mdash; автономное программирование</h2>
         <p className="text-muted-foreground leading-relaxed">
           <strong className="text-foreground">KUKA.Sim 4</strong> (актуальная
-          ветка 4.3 в 2024) &mdash; среда офлайн-симуляции на основе{' '}
+          ветка 4.3 в 2024) &mdash; среда автономной симуляции на основе{' '}
           <strong className="text-foreground">Visual Components</strong>. eCatalog
-          с готовыми моделями роботов KUKA, конвейеров, тулзов, типовых ячеек.
+          с готовыми моделями роботов KUKA, конвейеров, инструментов, типовых ячеек.
           Поддерживает{' '}
           <strong className="text-foreground">экспорт KRL-программ</strong> на
           реальный контроллер: построил траекторию в симуляторе &mdash; получил{' '}
@@ -137,20 +137,20 @@ public void run() {
           <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">.dat</code>.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          Лицензирование: trial на{' '}
-          <strong className="text-foreground">1 год</strong> доступен через{' '}
+          Лицензирование: пробная версия на{' '}
+          <strong className="text-foreground">1 год</strong> доступна через{' '}
           <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">my.kuka</code>{' '}
           Marketplace. Важно:{' '}
           <strong className="text-foreground">KUKA.OfficeLite</strong>{' '}
           (виртуальный KRC, нужен для проверки полной KRL-логики на ПК) &mdash;{' '}
-          <strong className="text-foreground">не входит в trial</strong> и
-          продаётся отдельно.
+          <strong className="text-foreground">не входит в пробную версию</strong>{' '}
+          и продаётся отдельно.
         </p>
       </motion.div>
 
       {/* Теория 4: Диагностика и Xpert */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
-        <h2 className="text-xl font-semibold mb-4">Диагностика и troubleshooting</h2>
+        <h2 className="text-xl font-semibold mb-4">Диагностика и устранение неполадок (troubleshooting)</h2>
         <p className="text-muted-foreground leading-relaxed">
           Алгоритм действий при сбое &mdash; стандартный для KUKA:
         </p>
@@ -159,27 +159,32 @@ public void run() {
             Прочитать список{' '}
             <strong className="text-foreground">активных сообщений</strong> на
             SmartPAD. Сообщения KSS делятся на пять типов:{' '}
-            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Information</code>,{' '}
-            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Notification</code>,{' '}
-            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Acknowledgement</code>,{' '}
-            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Wait</code>,{' '}
-            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Dialogue</code>.
+            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Information</code>{' '}
+            (информация),{' '}
+            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Notification</code>{' '}
+            (уведомление),{' '}
+            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Acknowledgement</code>{' '}
+            (требует подтверждения),{' '}
+            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Wait</code>{' '}
+            (ожидание),{' '}
+            <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Dialogue</code>{' '}
+            (диалог).
           </li>
           <li>
-            Найти все{' '}
-            <strong className="text-foreground">Acknowledge-сообщения</strong>:
+            Найти все сообщения с подтверждением{' '}
+            (<strong className="text-foreground">Acknowledge messages</strong>):
             для режима AUT все они должны быть подтверждены, иначе старт
             программы блокируется.
           </li>
           <li>
             Типичные причины: незакрытый защитный контур (E-Stop, дверь),
-            не-готовый периферийный сигнал (PLC, грипер), ошибки калибровки осей
+            не готовый периферийный сигнал (PLC, захват), ошибки калибровки осей
             или мастеринга.
           </li>
           <li>
             Устранить корневую причину, потом подтвердить кнопкой{' '}
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">Acknowledge all</code>{' '}
-            или скриптом.
+            (&laquo;Подтвердить всё&raquo;) или скриптом.
           </li>
           <li>
             Если сообщение возвращается &mdash; диагностика по коду ошибки{' '}
@@ -187,7 +192,7 @@ public void run() {
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">KSS01xxx</code>)
             в{' '}
             <strong className="text-foreground">Xpert</strong> (раздел{' '}
-            &laquo;Сообщения&raquo;). Доступ Basic &mdash; бесплатно после
+            &laquo;Сообщения&raquo;). Базовый доступ &mdash; бесплатно после
             регистрации.
           </li>
         </ol>
@@ -202,7 +207,7 @@ public void run() {
             xmlns="http://www.w3.org/2000/svg"
             className="w-full h-auto"
             role="img"
-            aria-label="Сравнение: слева колонка KRL для KRC4/KRC5 (Pascal-like, .src+.dat, LIN P1), справа Sunrise.Java для LBR iiwa (Java, OOP, lbr.move). Между колонками стрелка с надписью cobot LBR iiwa."
+            aria-label="Сравнение: слева колонка KRL для KRC4/KRC5 (в стиле Pascal, .src+.dat, LIN P1), справа Sunrise.Java для LBR iiwa (Java, объектно-ориентированный, lbr.move). Между колонками стрелка с надписью коллаборативный робот LBR iiwa."
           >
             <defs>
               <marker
@@ -233,7 +238,7 @@ public void run() {
               KRL для KRC4 / KRC5
             </text>
             <text x="35" y="68" fontSize="10" fill="var(--muted)">
-              язык: Pascal-like
+              язык: в стиле Pascal
             </text>
             <text x="35" y="86" fontSize="10" fill="var(--muted)">
               файлы: .src + .dat
@@ -268,7 +273,7 @@ public void run() {
               markerEnd="url(#arrow9)"
             />
             <text x="270" y="110" textAnchor="middle" fontSize="9" fill="var(--accent)">
-              cobot
+              коллаб.
             </text>
             <text x="270" y="138" textAnchor="middle" fontSize="9" fill="var(--accent)">
               LBR iiwa &rarr;
@@ -292,7 +297,7 @@ public void run() {
               язык: Java (Eclipse)
             </text>
             <text x="315" y="86" fontSize="10" fill="var(--muted)">
-              парадигма: OOP, многопоточность
+              парадигма: ООП, многопоточность
             </text>
             <text x="315" y="104" fontSize="10" fill="var(--muted)">
               типы: Frame, JointPosition
@@ -323,8 +328,8 @@ public void run() {
       <Takeaways
         items={[
           'LBR iiwa — отдельная экосистема: Sunrise.OS + Sunrise Cabinet + Java через Sunrise.Workbench. Не KRC, не KRL.',
-          'KUKA.Sim 4 — offline-симулятор (на базе Visual Components) с экспортом KRL. Trial 1 год через my.kuka. Без OfficeLite не выполняет полный KSS runtime.',
-          'Алгоритм troubleshooting: SmartPAD → активные сообщения → корневая причина → Acknowledge all → если не помогло → код ошибки в Xpert.',
+          'KUKA.Sim 4 — автономный симулятор (на базе Visual Components) с экспортом KRL. Пробная версия 1 год через my.kuka. Без OfficeLite не выполняет полный KSS во время выполнения.',
+          'Алгоритм диагностики: SmartPAD → активные сообщения → корневая причина → Acknowledge all → если не помогло → код ошибки в Xpert.',
         ]}
       />
 
@@ -341,7 +346,7 @@ public void run() {
               text: 'Java',
               correct: true,
               explanation:
-                'Sunrise.OS использует Java (Eclipse-based Sunrise.Workbench). KRL применяется для KRC4/KRC5, Sunrise — для LBR iiwa.',
+                'Sunrise.OS использует Java (Sunrise.Workbench на базе Eclipse). KRL применяется для KRC4/KRC5, Sunrise — для LBR iiwa.',
             },
             {
               text: 'IEC 61131-3 ST (Structured Text)',
@@ -362,8 +367,8 @@ public void run() {
           items={[
             { id: 'kuka-ag', text: 'KUKA AG (на базе Visual Components)' },
             { id: 'robodk', text: 'RoboDK Inc. (независимый, мультибрендовый)' },
-            { id: 'open-robotics', text: 'Open Robotics (open-source, через ROS)' },
-            { id: 'vc-oy', text: 'Visual Components OY (Финляндия, OEM для KUKA.Sim)' },
+            { id: 'open-robotics', text: 'Open Robotics (с открытым исходным кодом, через ROS)' },
+            { id: 'vc-oy', text: 'Visual Components OY (Финляндия, поставщик движка для KUKA.Sim)' },
           ]}
           zones={[
             { id: 'z-kukasim', label: 'KUKA.Sim 4', acceptIds: ['kuka-ag'] },
@@ -378,18 +383,18 @@ public void run() {
       <motion.div variants={fadeInItem}>
         <ScenarioCard
           scenario="Робот в режиме AUT останавливается с сообщением KSS00276 «Acknowledge messages» при попытке запуска. Алгоритм действий?"
-          context="Программа загружена и ранее запускалась. В предыдущей смене была сработка E-Stop и работы по обслуживанию гриппера. После перезапуска KSS блокирует старт."
+          context="Программа загружена и ранее запускалась. В предыдущей смене была сработка E-Stop и работы по обслуживанию захвата. После перезапуска KSS блокирует старт."
           options={[
             {
               text: 'Перепрошить KSS',
               outcome:
-                'Слишком радикально, диагностика не выполнена. Перепрошивка стирает калибровку и не решает проблему с активным Acknowledge-сообщением.',
+                'Слишком радикально, диагностика не выполнена. Перепрошивка стирает калибровку и не решает проблему с активным сообщением о подтверждении.',
               score: 0,
             },
             {
-              text: 'Прочитать список сообщений на SmartPAD, найти Acknowledge-сообщения, устранить корневые причины (защитный контур, периферия, калибровка), затем Acknowledge all. Если возвращается — поиск по коду в Xpert',
+              text: 'Прочитать список сообщений на SmartPAD, найти сообщения с подтверждением (Acknowledge), устранить корневые причины (защитный контур, периферия, калибровка), затем Acknowledge all. Если возвращается — поиск по коду в Xpert',
               outcome:
-                'Стандартный troubleshooting-алгоритм KUKA. KSS00276 — общий код, требующий ручного просмотра конкретных Acknowledge-сообщений; снимать их без устранения причины нельзя.',
+                'Стандартный алгоритм диагностики KUKA. KSS00276 — общий код, требующий ручного просмотра конкретных сообщений с подтверждением; снимать их без устранения причины нельзя.',
               score: 1,
             },
             {
@@ -401,7 +406,7 @@ public void run() {
             {
               text: 'Игнорировать и нажать Acknowledge all сразу',
               outcome:
-                'Опасно — нерасследованная причина (например, незакрытый защитный контур или недо-калиброванная ось) может вернуться и привести к аварийной остановке.',
+                'Опасно — нерасследованная причина (например, незакрытый защитный контур или некалиброванная ось) может вернуться и привести к аварийной остановке.',
               score: 0,
             },
           ]}
@@ -415,9 +420,9 @@ public void run() {
           <strong className="text-foreground">KRL + WorkVisual</strong>; для
           коллаборативного LBR iiwa &mdash;{' '}
           <strong className="text-foreground">Sunrise.Java + Sunrise.Workbench</strong>;
-          для офлайн-планирования &mdash;{' '}
+          для автономного планирования &mdash;{' '}
           <strong className="text-foreground">KUKA.Sim 4</strong>; для разбора
-          ошибок &mdash; SmartPAD-сообщения и база знаний{' '}
+          ошибок &mdash; сообщения SmartPAD и база знаний{' '}
           <strong className="text-foreground">Xpert</strong>.
         </p>
       </motion.div>

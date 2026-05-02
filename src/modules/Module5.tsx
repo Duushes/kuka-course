@@ -30,11 +30,11 @@ export default function Module5() {
         <p className="text-muted-foreground leading-relaxed">
           У инженера-интегратора KUKA два главных инструмента.{' '}
           <strong className="text-foreground">WorkVisual</strong> &mdash; это
-          инженерный фреймворк, в нём конфигурируется ячейка: какие устройства
-          подключены, по каким шинам, как сигналы маппятся на адреса.{' '}
+          инженерная среда, в ней конфигурируется ячейка: какие устройства
+          подключены, по каким шинам, как сигналы привязываются к адресам.{' '}
           <strong className="text-foreground">SmartPAD</strong> &mdash; пульт,
-          на котором программа в итоге крутится: ключ режимов, JOG-кнопки,
-          обучение точек, запуск и стоп.
+          на котором программа в итоге работает: ключ режимов, кнопки ручного
+          перемещения (JOG), обучение точек, запуск и стоп.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           В этом модуле разбираем, как из пустого проекта в WorkVisual получить
@@ -49,18 +49,19 @@ export default function Module5() {
         <h2 className="text-xl font-semibold mb-4">WorkVisual: что это</h2>
         <p className="text-muted-foreground leading-relaxed">
           <strong className="text-foreground">WorkVisual</strong> &mdash;
-          Eclipse-based IDE от KUKA для проектирования роботизированных ячеек.
-          Скачивается с портала my.kuka бесплатно после регистрации, ставится
-          на обычный Windows-PC инженера. По сути это набор плагинов поверх
-          Eclipse, заточенных под KRC.
+          среда разработки на базе Eclipse (Eclipse-based IDE) от KUKA для
+          проектирования роботизированных ячеек. Скачивается с портала my.kuka
+          бесплатно после регистрации, ставится на обычный Windows-PC инженера.
+          По сути это набор плагинов поверх Eclipse, заточенных под KRC.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          Внутри WorkVisual инженер собирает <strong className="text-foreground">project</strong>
+          Внутри WorkVisual инженер собирает <strong className="text-foreground">проект (project)</strong>
           {' '}&mdash; XML-структуру, в которой описаны все устройства ячейки,
-          полевые шины, маппинг сигналов и привязка к конкретному контроллеру.
-          Когда project готов, его <strong className="text-foreground">transferring</strong>{' '}
-          (деплоят) на KRC по TCP/IP через KLI-кабель, и после reboot контроллер
-          работает по новой конфигурации.
+          полевые шины, привязка сигналов и связь с конкретным контроллером.
+          Когда проект готов, выполняется его{' '}
+          <strong className="text-foreground">развёртывание (transferring)</strong>{' '}
+          на KRC по TCP/IP через KLI-кабель (KUKA Line Interface), и после
+          перезагрузки контроллер работает по новой конфигурации.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Версии важны для совместимости:{' '}
@@ -75,7 +76,7 @@ export default function Module5() {
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
         <h2 className="text-xl font-semibold mb-4">Создание проекта: пять шагов</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Канонический workflow инженера в WorkVisual выглядит так:
+          Канонический рабочий процесс инженера в WorkVisual выглядит так:
         </p>
         <ol className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-decimal pl-5">
           <li>
@@ -94,7 +95,7 @@ export default function Module5() {
             слотам контроллера.
           </li>
           <li>
-            <strong className="text-foreground">IO mapping</strong> &mdash;
+            <strong className="text-foreground">Привязка сигналов ввода-вывода (IO mapping)</strong> &mdash;
             привязываем символьные имена сигналов (например,{' '}
             <code className="text-foreground">dlBoxReady</code>) к байтам и битам
             на шине. Программе KRL они потом доступны через{' '}
@@ -103,8 +104,8 @@ export default function Module5() {
           </li>
           <li>
             <strong className="text-foreground">Activate project</strong>{' '}
-            &mdash; деплоим project на KRC. После reboot контроллер активирует
-            новую конфигурацию.
+            &mdash; выполняем развёртывание проекта на KRC. После перезагрузки
+            контроллер активирует новую конфигурацию.
           </li>
         </ol>
       </motion.div>
@@ -119,13 +120,13 @@ export default function Module5() {
         </p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
-            <strong className="text-foreground">T1 &mdash; Manual reduced velocity</strong>:
+            <strong className="text-foreground">T1 &mdash; ручной режим со сниженной скоростью (Manual reduced velocity)</strong>:
             ручной режим с ограничением скорости TCP до 250&nbsp;мм/с. Подача
-            через JOG-кнопки. Обязателен для обучения точек по нормам
-            безопасности &mdash; человек может находиться рядом.
+            через кнопки ручного перемещения (JOG). Обязателен для обучения
+            точек по нормам безопасности &mdash; человек может находиться рядом.
           </li>
           <li>
-            <strong className="text-foreground">T2 &mdash; Manual high velocity</strong>:
+            <strong className="text-foreground">T2 &mdash; ручной режим на полной скорости</strong>:
             ручной режим на полной программной скорости. Используется для
             визуальной проверки траектории. На современных установках в ЕС T2
             часто <strong className="text-foreground">отключают на этапе ввода
@@ -134,12 +135,13 @@ export default function Module5() {
             зоне снаружи ограждения.
           </li>
           <li>
-            <strong className="text-foreground">AUT &mdash; Automatic</strong>:
-            автоматический режим, программа стартует с SmartPAD'а или из Cell
-            Programming. Защитные барьеры замкнуты, скорость полная.
+            <strong className="text-foreground">AUT &mdash; автоматический</strong>:
+            автоматический режим, программа стартует с SmartPAD'а или из
+            программирования ячейки (Cell Programming). Защитные барьеры
+            замкнуты, скорость полная.
           </li>
           <li>
-            <strong className="text-foreground">EXT &mdash; External</strong>:
+            <strong className="text-foreground">EXT &mdash; внешнее управление</strong>:
             программа стартует по сигналу из PLC/SCADA через DI. Используется в
             полностью автоматизированных линиях, где роботом дирижирует внешний
             контроллер.
@@ -149,16 +151,16 @@ export default function Module5() {
 
       {/* Теория 4: JOG и обучение точек */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
-        <h2 className="text-xl font-semibold mb-4">JOG и обучение точек</h2>
+        <h2 className="text-xl font-semibold mb-4">Режим JOG и обучение точек</h2>
         <p className="text-muted-foreground leading-relaxed">
-          <strong className="text-foreground">JOG</strong> &mdash; ручное
-          перемещение робота через кнопки на SmartPAD'е. Доступно в режимах T1
-          и T2 при удержании enabling switch в среднем положении. Подача
-          возможна в двух базовых режимах:
+          <strong className="text-foreground">Режим JOG (ручное перемещение)</strong> &mdash;
+          ручное перемещение робота через кнопки на SmartPAD'е. Доступно в
+          режимах T1 и T2 при удержании кнопки подтверждения движения (enabling
+          switch) в среднем положении. Подача возможна в двух базовых режимах:
         </p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
-            <strong className="text-foreground">Axis-mode</strong> &mdash;
+            <strong className="text-foreground">Осевой режим (axis-mode)</strong> &mdash;
             движение по отдельным осям A1&ndash;A6, каждая ось вращается
             независимо.
           </li>
@@ -170,7 +172,7 @@ export default function Module5() {
         </ul>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Когда оператор довёл робота до желаемой позиции, он жмёт{' '}
-          <strong className="text-foreground">Touch&nbsp;Up</strong>: KSS
+          <strong className="text-foreground">обучение точки (Touch&nbsp;Up)</strong>: KSS
           сохраняет текущие координаты в файл с расширением{' '}
           <code className="text-foreground">.dat</code>, привязанный к программе.
           Это и есть обученная точка &mdash; в KRL-программе она будет
@@ -256,24 +258,25 @@ export default function Module5() {
           </svg>
         </div>
         <p className="text-xs text-muted-foreground mt-3">
-          Иерархия project tree: контроллер содержит hardware и io mapping, в
-          hardware лежит fieldbus с подключёнными devices.
+          Иерархия дерева проекта: контроллер содержит оборудование (hardware)
+          и привязку сигналов ввода-вывода, в оборудовании &mdash; полевая шина
+          (fieldbus) с подключёнными устройствами (devices).
         </p>
       </motion.div>
 
       <Takeaways
         items={[
-          'Workflow в WorkVisual: New project → Add controller → Configure fieldbus → IO mapping → Activate.',
+          'Рабочий процесс в WorkVisual: New project → Add controller → Configure fieldbus → привязка сигналов ввода-вывода → Activate.',
           'WorkVisual 6.x работает с KRC4 (KSS 8.5+) и KRC5; 5.x — только с KRC4.',
-          'SmartPAD — ключ режимов (T1 / T2 / AUT / EXT) + enabling switch. Без удержания enabling в среднем положении T1/T2 не двигают робота.',
-          'Touch Up в JOG-режиме автоматически добавляет DECL POS в .dat.',
+          'SmartPAD — ключ режимов (T1 / T2 / AUT / EXT) + кнопка подтверждения движения. Без удержания кнопки в среднем положении T1/T2 не двигают робота.',
+          'Touch Up в режиме JOG автоматически добавляет DECL POS в .dat.',
         ]}
       />
 
       {/* Quiz */}
       <motion.div variants={fadeInItem}>
         <Quiz
-          question="Какой полевой стандарт НЕ поддерживается WorkVisual для IO-mapping штатно?"
+          question="Какой полевой стандарт НЕ поддерживается WorkVisual для привязки сигналов ввода-вывода штатно?"
           options={[
             {
               text: 'PROFINET',
@@ -308,7 +311,7 @@ export default function Module5() {
             { id: 'new', text: 'New project' },
             { id: 'controller', text: 'Add controller (KRC4/KRC5)' },
             { id: 'fieldbus', text: 'Configure fieldbus' },
-            { id: 'iomap', text: 'IO mapping (символы ↔ адреса)' },
+            { id: 'iomap', text: 'Привязка сигналов ввода-вывода (символы ↔ адреса)' },
             { id: 'activate', text: 'Activate project на KRC' },
           ]}
           zones={[
@@ -324,13 +327,13 @@ export default function Module5() {
       {/* ScenarioCard: робот не отвечает на JOG */}
       <motion.div variants={fadeInItem}>
         <ScenarioCard
-          scenario="Робот не отвечает на JOG в режиме T1. Что проверять первым?"
-          context="Контроллер запитан, SmartPAD активен, программа загружена. Оператор жмёт JOG-кнопку — движения нет."
+          scenario="Робот не отвечает на ручное перемещение в режиме T1. Что проверять первым?"
+          context="Контроллер запитан, SmartPAD активен, программа загружена. Оператор жмёт кнопку JOG — движения нет."
           options={[
             {
-              text: 'Включён ли enabling switch (3-position dead-man) на SmartPAD’е',
+              text: 'Включена ли кнопка подтверждения движения (3-position dead-man) на SmartPAD’е',
               outcome:
-                'Верно. Без удержания enabling switch в среднем положении KSS блокирует движения в T1/T2. Самая частая причина.',
+                'Верно. Без удержания кнопки подтверждения движения в среднем положении KSS блокирует движения в T1/T2. Самая частая причина.',
               score: 3,
             },
             {
@@ -347,7 +350,7 @@ export default function Module5() {
             {
               text: 'Проверить кабель PROFINET',
               outcome:
-                'JOG не зависит от внешней шины — он локальный.',
+                'Ручное перемещение не зависит от внешней шины — оно локальное.',
               score: 0,
             },
           ]}
@@ -359,8 +362,8 @@ export default function Module5() {
         <p className="text-muted-foreground leading-relaxed">
           Теперь у нас есть проект в WorkVisual, активированный на KRC, и
           понимание режимов SmartPAD'а. В следующем модуле подключим к этой
-          ячейке внешний мир: PLC по PROFINET, Vision-систему и обмен сигналами
-          через IO mapping.
+          ячейке внешний мир: PLC по PROFINET, систему машинного зрения и
+          обмен сигналами через привязку сигналов ввода-вывода.
         </p>
       </motion.div>
     </ModuleWrapper>

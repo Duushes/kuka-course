@@ -31,7 +31,7 @@ export default function Module4() {
           синтаксически Pascal-подобный язык для KUKA. Без указателей и пользовательских
           типов; всё сосредоточено на{' '}
           <strong className="text-foreground">движениях</strong> манипулятора и{' '}
-          <strong className="text-foreground">обмене сигналами</strong> с контроллером.
+          <strong className="text-foreground">обмене сигналами</strong> с&nbsp;контроллером.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Одна программа &mdash; это{' '}
@@ -71,7 +71,7 @@ export default function Module4() {
 DEF demo()
   INI                    ; init $BASE, $TOOL, $VEL
   PTP HOME               ; стартовая позиция
-  $VEL.CP = 0.3          ; cartesian velocity, м/с
+  $VEL.CP = 0.3          ; декартова скорость, м/с
   PTP P1                 ; быстрый ход к P1
   LIN P2                 ; линейно к P2
   LIN P3                 ; линейно к P3
@@ -253,7 +253,7 @@ LIN P4            ; точное прохождение через P4 (стоп)
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$VEL.CP</code>{' '}
-            &mdash; cartesian velocity для{' '}
+            &mdash; декартова скорость (Cartesian velocity) для{' '}
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">LIN</code>/
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">CIRC</code>,
             единицы &mdash; <strong className="text-foreground">м/с</strong>; типичные
@@ -266,7 +266,7 @@ LIN P4            ; точное прохождение через P4 (стоп)
           </li>
           <li>
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$ACC.CP</code>{' '}
-            &mdash; cartesian acceleration.
+            &mdash; декартово ускорение.
           </li>
           <li>
             <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-muted">$BASE</code>,{' '}
@@ -470,7 +470,7 @@ LIN P5`}</pre>
           'Программа KRL — пара файлов: .src (логика) + .dat (данные точек). Без декларации точки в .dat программа не запустится.',
           'Команды движения: PTP (по осям, нелинейная траектория), LIN (прямая в декартовом), CIRC (дуга), SPLINE (плавная кривая через несколько точек).',
           'Approximation (C_DIS / C_ORI / C_VEL) — флаги «не останавливайся, скругли». Без них робот точно проходит через точку.',
-          '$VEL.CP задаёт Cartesian velocity в м/с. Типичный диапазон 0.1–2 м/с (сварка ≈ 0.01–0.1, перенос ≈ 1–2).',
+          '$VEL.CP задаёт декартову скорость в м/с. Типичный диапазон 0.1–2 м/с (сварка ≈ 0.01–0.1, перенос ≈ 1–2).',
         ]}
       />
 
@@ -499,7 +499,7 @@ END`}</pre>
             {
               text: '$VEL.CP = 0.3 — неправильная единица измерения',
               outcome:
-                'Нет: 0.3 м/с — типичное значение для cartesian velocity (диапазон 0.1–2 м/с). Ошибки тут нет.',
+                'Нет: 0.3 м/с — типичное значение для декартовой скорости (диапазон 0.1–2 м/с). Ошибки тут нет.',
               score: 0,
             },
             {

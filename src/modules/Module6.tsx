@@ -34,15 +34,17 @@ export default function Module6() {
           Безопасность промышленного робота &mdash; это не одна красная кнопка, а целая
           пирамида: <strong className="text-foreground">международные стандарты</strong> ISO,
           поверх которых строятся <strong className="text-foreground">аппаратные средства
-          </strong> (e-stop, enabling switch, safety-board), а сверху &mdash;{' '}
+          </strong> (кнопка аварийного останова (e-stop), кнопка подтверждения движения
+          (enabling switch), плата безопасности (safety-board)), а сверху &mdash;{' '}
           <strong className="text-foreground">программная конфигурация</strong> в пакете
           SafeOperation. Без всех трёх уровней робот не получит CE-маркировку и не сможет
           легально работать в ЕС.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Ниже разберём ключевые стандарты (ISO 10218, ISO 13849, EN 60204), категории
-          остановок, специфику cobot (биомеханические лимиты) и то, как KUKA SafeOperation
-          превращает геометрию ячейки в сертифицированную safety-функцию.
+          остановок, специфику коллаборативных роботов (cobot) с их биомеханическими
+          лимитами и то, как KUKA SafeOperation превращает геометрию ячейки в
+          сертифицированную функцию безопасности.
         </p>
       </motion.div>
 
@@ -69,9 +71,9 @@ export default function Module6() {
           и поглотили большую часть{' '}
           <strong className="text-foreground">ISO/TS 15066</strong> &mdash; технической
           спецификации 2016&nbsp;года, которая отдельно описывала коллаборативные роботы
-          (cobot). Теперь биомеханические лимиты и требования к cobot живут прямо в
-          ISO 10218-1:2025. Соответствие этому стандарту обязательно для CE-маркировки в
-          ЕС.
+          (cobot). Теперь биомеханические лимиты и требования к коллаборативным роботам
+          живут прямо в ISO 10218-1:2025. Соответствие этому стандарту обязательно для
+          CE-маркировки в ЕС.
         </p>
       </motion.div>
 
@@ -89,7 +91,7 @@ export default function Module6() {
               text: 'Его требования к коллаборативным роботам интегрированы в новую редакцию ISO 10218-1:2025',
               correct: true,
               explanation:
-                'В 2025 ISO 10218-1/-2 переизданы и поглотили большую часть ISO/TS 15066. Теперь cobot-требования живут в одном документе.',
+                'В 2025 ISO 10218-1/-2 переизданы и поглотили большую часть ISO/TS 15066. Теперь требования к коллаборативным роботам живут в одном документе.',
             },
             {
               text: 'Преобразован в ISO 10218-3',
@@ -99,7 +101,7 @@ export default function Module6() {
             {
               text: 'Стал частью ISO 13849-2',
               explanation:
-                'ISO 13849 — про функциональную безопасность систем управления (Performance Level), а не про cobot-биомеханику. Содержательно эти документы не пересекаются.',
+                'ISO 13849 — про функциональную безопасность систем управления (Performance Level), а не про биомеханику коллаборативных роботов. Содержательно эти документы не пересекаются.',
             },
           ]}
         />
@@ -110,18 +112,18 @@ export default function Module6() {
         <h2 className="text-xl font-semibold mb-4">EN ISO 13849-1 &mdash; функциональная безопасность</h2>
         <p className="text-muted-foreground leading-relaxed">
           <strong className="text-foreground">EN ISO 13849-1</strong> описывает, как
-          проектировать safety-функции систем управления. Ключевые понятия:
+          проектировать функции безопасности систем управления. Ключевые понятия:
         </p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
-            <strong className="text-foreground">Performance Level (PL)</strong> &mdash;
-            шкала надёжности safety-функции от <em>a</em> (низший) до <em>e</em> (высший).
-            Большинство safety-функций робота требуют{' '}
+            <strong className="text-foreground">Уровень функциональной безопасности (Performance Level, PL)</strong> &mdash;
+            шкала надёжности функции безопасности от <em>a</em> (низший) до <em>e</em>{' '}
+            (высший). Большинство функций безопасности робота требуют{' '}
             <strong className="text-foreground">PLd</strong> или{' '}
             <strong className="text-foreground">PLe</strong>.
           </li>
           <li>
-            <strong className="text-foreground">Categories (Cat 1&ndash;4)</strong> &mdash;
+            <strong className="text-foreground">Категории безопасности (Categories, Cat 1&ndash;4)</strong> &mdash;
             архитектурные требования: одноканальная, двухканальная, с диагностикой и т.д.
             Для KUKA типично <strong className="text-foreground">Cat 3</strong> (двухканальная
             с частичной диагностикой) или <strong className="text-foreground">Cat 4</strong>
@@ -129,8 +131,9 @@ export default function Module6() {
           </li>
         </ul>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          Safety-board <strong className="text-foreground">ESC</strong> в шкафу KRC4/KRC5
-          сертифицирован по <strong className="text-foreground">SIL&nbsp;3 / PLe</strong>{' '}
+          Плата безопасности <strong className="text-foreground">ESC</strong> в шкафу
+          KRC4/KRC5 сертифицирована по{' '}
+          <strong className="text-foreground">SIL&nbsp;3 / PLe</strong>{' '}
           &mdash; этого хватает для большинства промышленных задач.
         </p>
       </motion.div>
@@ -157,9 +160,10 @@ export default function Module6() {
           <li>
             <strong className="text-foreground">Cat 2</strong> &mdash; управляемая остановка{' '}
             <em>без</em> снятия питания: приводы остаются под напряжением.{' '}
-            <strong className="text-foreground">Для emergency stop</strong> (E-stop) Cat 2{' '}
-            <em>не разрешён</em> по EN&nbsp;ISO&nbsp;13850 &mdash; обязательны Cat 0 или Cat 1.
-            Как обычная operational-остановка (например, по концевику) Cat 2 допустим.
+            <strong className="text-foreground">Для аварийного стопа (emergency stop)</strong>{' '}
+            Cat 2 <em>не разрешён</em> по EN&nbsp;ISO&nbsp;13850 &mdash; обязательны Cat 0 или
+            Cat 1. Как обычная эксплуатационная остановка (например, по концевику) Cat 2
+            допустим.
           </li>
         </ul>
       </motion.div>
@@ -186,25 +190,27 @@ export default function Module6() {
         <h2 className="text-xl font-semibold mb-4">KUKA SafeOperation</h2>
         <p className="text-muted-foreground leading-relaxed">
           <strong className="text-foreground">SafeOperation</strong> &mdash; программная
-          опция KUKA, которая превращает геометрию ячейки в сертифицированную safety-функцию.
-          В <strong className="text-foreground">WorkVisual</strong> ты задаёшь safe-зоны
-          (кубы, цилиндры, произвольные полигоны), а контроллер во время работы постоянно
-          мониторит, что TCP не выходит за их границы. Если выйдет &mdash; немедленно stop.
+          опция KUKA, которая превращает геометрию ячейки в сертифицированную функцию
+          безопасности. В <strong className="text-foreground">WorkVisual</strong> ты
+          задаёшь зоны безопасности (safe zones) &mdash; кубы, цилиндры, произвольные
+          полигоны, &mdash; а контроллер во время работы постоянно отслеживает, что TCP
+          не выходит за их границы. Если выйдет &mdash; немедленный стоп.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">Что входит в пакет:</p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
-            <strong className="text-foreground">Safe zones</strong> &mdash; до 16
-            конфигурируемых зон, каждая с независимым правилом (запретная / safe).
+            <strong className="text-foreground">Зоны безопасности (safe zones)</strong> &mdash;
+            до 16 конфигурируемых зон, каждая с независимым правилом (запретная /
+            безопасная).
           </li>
           <li>
-            <strong className="text-foreground">Safe Range Monitoring</strong> &mdash;
+            <strong className="text-foreground">Safe Range Monitoring (контроль безопасных границ)</strong> &mdash;
             мониторинг положения отдельных осей (например, A1 не должен выходить за
             ±90&deg;).
           </li>
           <li>
-            <strong className="text-foreground">Safe Velocity</strong> &mdash; ограничение
-            скорости TCP в определённых зонах.
+            <strong className="text-foreground">Safe Velocity (контроль безопасной скорости)</strong> &mdash;
+            ограничение скорости TCP в определённых зонах.
           </li>
           <li>
             <strong className="text-foreground">Safe Tool</strong> &mdash; учёт геометрии
@@ -214,13 +220,13 @@ export default function Module6() {
         <p className="text-muted-foreground leading-relaxed mt-4">
           Весь пакет сертифицирован по{' '}
           <strong className="text-foreground">SIL&nbsp;3 / PLe</strong>, то есть может
-          заменять часть физических ограждений (light curtains, защитные двери).
+          заменять часть физических ограждений (световые завесы, защитные двери).
         </p>
       </motion.div>
 
       {/* Теория 5: Cobot-лимиты */}
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-10">
-        <h2 className="text-xl font-semibold mb-4">Cobot-лимиты (биомеханика)</h2>
+        <h2 className="text-xl font-semibold mb-4">Лимиты для коллаборативных роботов (cobot-limits)</h2>
         <p className="text-muted-foreground leading-relaxed">
           Для коллаборативных роботов одних только зон мало &mdash; они работают рядом с
           человеком и могут с ним соприкасаться. <strong className="text-foreground">
@@ -230,37 +236,40 @@ export default function Module6() {
         </p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
-            <strong className="text-foreground">Лоб</strong> &mdash; ~130&nbsp;Н transient
-            (кратковременный контакт).
+            <strong className="text-foreground">Лоб</strong> &mdash; ~130&nbsp;Н при
+            ударном контакте (transient).
           </li>
           <li>
-            <strong className="text-foreground">Грудь</strong> &mdash; ~220&nbsp;Н transient.
+            <strong className="text-foreground">Грудь</strong> &mdash; ~220&nbsp;Н при
+            ударном контакте.
           </li>
           <li>
-            <strong className="text-foreground">Плечо</strong> &mdash; ~150&nbsp;Н transient,
-            но в quasi-static режиме лимит ниже (~65&nbsp;Н).
+            <strong className="text-foreground">Плечо</strong> &mdash; ~150&nbsp;Н при
+            ударном контакте, но при медленном контакте (quasi-static) лимит ниже
+            (~65&nbsp;Н).
           </li>
         </ul>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          У cobot <strong className="text-foreground">LBR iiwa</strong> (KUKA) в каждом из
-          семи суставов встроены{' '}
-          <strong className="text-foreground">силомоментные сенсоры</strong>: робот видит
-          контакт ещё до того, как сила превысит лимит, и переходит в protective stop. У
-          обычного промышленного KR&nbsp;QUANTEC такой защиты нет &mdash; он опирается на
-          safe zones из SafeOperation.
+          У коллаборативного робота <strong className="text-foreground">LBR iiwa</strong>{' '}
+          (KUKA) в каждом из семи суставов встроены{' '}
+          <strong className="text-foreground">датчики моментов в суставах (joint torque sensors)</strong>:
+          робот видит контакт ещё до того, как сила превысит лимит, и переходит в
+          защитную остановку (protective stop). У обычного промышленного
+          KR&nbsp;QUANTEC такой защиты нет &mdash; он опирается на зоны безопасности
+          из SafeOperation.
         </p>
       </motion.div>
 
       {/* SVG-схема: safe zones + категории stop */}
       <motion.div variants={fadeInItem} className="mb-10">
-        <h2 className="text-xl font-semibold mb-4">Схема: safe-зоны и категории остановок</h2>
+        <h2 className="text-xl font-semibold mb-4">Схема: зоны безопасности и категории остановок</h2>
         <div className="rounded-xl border border-border/50 bg-muted/30 p-4">
           <svg
             viewBox="0 0 480 300"
             xmlns="http://www.w3.org/2000/svg"
             className="w-full h-auto"
             role="img"
-            aria-label="Робот в центре, вокруг — три safe-зоны: зелёная (safe), жёлтая (reduced speed), красная (stop). Сверху — таблица категорий Cat 0/1/2."
+            aria-label="Робот в центре, вокруг — три зоны безопасности: зелёная (safe), жёлтая (reduced speed), красная (stop). Сверху — таблица категорий Cat 0/1/2."
           >
             {/* Заголовок и таблица Cat 0/1/2 */}
             <text x="240" y="22" textAnchor="middle" fontSize="11" fill="var(--muted)" fontWeight="600">
@@ -322,47 +331,47 @@ export default function Module6() {
         </div>
         <p className="text-xs text-muted-foreground mt-3">
           Зелёная зона &mdash; полная скорость; жёлтая &mdash; ограничение до 250&nbsp;мм/с
-          (T1-режим); красная &mdash; немедленный Cat&nbsp;1 stop.
+          (режим T1); красная &mdash; немедленная остановка Cat&nbsp;1.
         </p>
       </motion.div>
 
       <Takeaways
         items={[
-          'Безопасность робота — это пирамида: ISO 10218 (стандарт) + железо (e-stop, enabling, ESC) + софт (SafeOperation).',
-          'ISO 10218-1/-2:2025 поглотил ISO/TS 15066 — биомеханические требования к cobot теперь в одном документе.',
-          'Категории остановок (EN 60204-1): Cat 0 (немедленное снятие питания), Cat 1 (управляемое торможение, потом снятие), Cat 2 (без снятия — недопустимо для emergency stop).',
-          'У LBR iiwa встроены torque-сенсоры в каждом суставе; у промышленных KR — защита через safe zones SafeOperation.',
+          'Безопасность робота — это пирамида: ISO 10218 (стандарт) + железо (кнопка аварийного останова, кнопка подтверждения движения, ESC) + софт (SafeOperation).',
+          'ISO 10218-1/-2:2025 поглотил ISO/TS 15066 — биомеханические требования к коллаборативным роботам теперь в одном документе.',
+          'Категории остановок (EN 60204-1): Cat 0 (немедленное снятие питания), Cat 1 (управляемое торможение, потом снятие), Cat 2 (без снятия — недопустимо для аварийного стопа).',
+          'У LBR iiwa встроены датчики моментов в каждом суставе; у промышленных KR — защита через зоны безопасности SafeOperation.',
         ]}
       />
 
       {/* ScenarioCard — финальный apply, привязан к cobot-биомеханике */}
       <motion.div variants={fadeInItem}>
         <ScenarioCard
-          scenario="Cobot LBR iiwa задел человека за плечо при выполнении pick-and-place. Какой stop сработал?"
-          context="LBR iiwa — 7-осевой коллаборативный робот KUKA с силомоментными сенсорами в каждом суставе."
+          scenario="Коллаборативный робот LBR iiwa задел человека за плечо при выполнении pick-and-place. Какой стоп сработал?"
+          context="LBR iiwa — 7-осевой коллаборативный робот KUKA с датчиками моментов в каждом суставе."
           options={[
             {
               text: 'A) Cat 0 — жёсткое снятие питания приводов',
               outcome:
-                'Не лучший вариант. Жёсткое снятие питания опасно для cobot: риск падения payload, тормоз срабатывает с задержкой. Cat 0 в cobot обычно не первая реакция.',
+                'Не лучший вариант. Жёсткое снятие питания опасно для коллаборативного робота: риск падения полезной нагрузки, тормоз срабатывает с задержкой. Cat 0 у cobot обычно не первая реакция.',
               score: 0,
             },
             {
-              text: 'B) Joint torque-сенсоры в каждом суставе детектировали внешнюю силу выше порога (~65 Н quasi-static / ~150 Н transient для плеча по ISO/TS 15066), сработал protective stop (Safety-Stop 1, аналог Cat 1)',
+              text: 'B) Датчики моментов в каждом суставе обнаружили внешнюю силу выше порога (~65 Н при медленном контакте / ~150 Н при ударном контакте для плеча по ISO/TS 15066), сработала защитная остановка (protective stop, Safety-Stop 1, аналог Cat 1)',
               outcome:
-                'Верно. LBR iiwa имеет torque-сенсоры в каждом из семи суставов; контроллер по их показаниям вычисляет внешнюю силу контакта. При превышении сконфигурированного порога робот переходит в protective stop. Это специфика cobot — у промышленного KR QUANTEC такой защиты нет, он опирается на safe zones из SafeOperation.',
+                'Верно. LBR iiwa имеет датчики моментов в каждом из семи суставов; контроллер по их показаниям вычисляет внешнюю силу контакта. При превышении сконфигурированного порога робот переходит в защитную остановку. Это специфика коллаборативных роботов — у промышленного KR QUANTEC такой защиты нет, он опирается на зоны безопасности из SafeOperation.',
               score: 2,
             },
             {
               text: 'C) Cat 2 — приводы остаются под напряжением',
               outcome:
-                'Не подходит. Cat 2 не разрешён как primary stop в новых редакциях ISO 10218 / EN 60204-1: приводы под током могут «дёрнуть» руку, что опасно при контакте с человеком.',
+                'Не подходит. Cat 2 не разрешён как основной стоп (primary stop) в новых редакциях ISO 10218 / EN 60204-1: приводы под током могут «дёрнуть» руку, что опасно при контакте с человеком.',
               score: 0,
             },
             {
               text: 'D) Cat 0, и больше ничего',
               outcome:
-                'Слишком грубо. Cat 0 без управляемого торможения для cobot не подходит — payload по инерции продолжит движение. Нужна именно комбинация detection + Cat 1.',
+                'Слишком грубо. Cat 0 без управляемого торможения для коллаборативного робота не подходит — полезная нагрузка по инерции продолжит движение. Нужна именно комбинация детекции и Cat 1.',
               score: 0,
             },
           ]}
@@ -373,10 +382,10 @@ export default function Module6() {
       <motion.div variants={fadeInItem} className="prose prose-invert max-w-none mb-4">
         <p className="text-muted-foreground leading-relaxed">
           Безопасность робота &mdash; это не один стандарт, а связка ISO 10218 (требования
-          к роботу), ISO 13849 (как проектировать safety-функции), EN 60204 (категории
-          остановок) и аппаратно-программная реализация (ESC&nbsp;board + SafeOperation +
-          силомоментные сенсоры на cobot). В следующем модуле перейдём к интеграции этой
-          связки с PLC-системой завода.
+          к роботу), ISO 13849 (как проектировать функции безопасности), EN 60204
+          (категории остановок) и аппаратно-программная реализация (плата ESC +
+          SafeOperation + датчики моментов на коллаборативных роботах). В следующем
+          модуле перейдём к интеграции этой связки с PLC-системой завода.
         </p>
       </motion.div>
     </ModuleWrapper>

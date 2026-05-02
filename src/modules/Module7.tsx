@@ -15,7 +15,7 @@ export default function Module7() {
     <ModuleWrapper
       moduleIndex={7}
       title="Прикладные пакеты"
-      subtitle="Готовые решения: палеты, сварка, vision, PLC"
+      subtitle="Готовые решения: палеты, сварка, машинное зрение, PLC"
       readingList={[
         {
           title: 'KUKA.PalletTech',
@@ -57,9 +57,10 @@ export default function Module7() {
           <strong className="text-foreground">KUKA.PalletTech</strong> &mdash; пакет для
           задач паллетирования: робот собирает коробки с конвейера и укладывает их на палету
           по заданной схеме. Главная фишка пакета &mdash;{' '}
-          <strong className="text-foreground">graphical pallet editor</strong> внутри
+          <strong className="text-foreground">графический редактор палет (graphical pallet editor)</strong> внутри
           WorkVisual: интегратор задаёт геометрию палеты, размер коробки и схему укладки
-          (pinwheel, brick, slip-sheet и т.д.), а KSS сам генерирует траекторию.
+          по типовым схемам укладки: pinwheel, brick (кирпичная), column (колонна), interlock (с переплётом),
+          разделительный лист (slip-sheet) и т.д., а KSS сам генерирует траекторию.
         </p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
@@ -67,11 +68,11 @@ export default function Module7() {
             <strong className="text-foreground">brick</strong>, column, interlock и т.д.
           </li>
           <li>
-            Поддержка <strong className="text-foreground">многослойных палет</strong> со
-            slip-sheet&rsquo;ами между слоями для устойчивости штабеля.
+            Поддержка <strong className="text-foreground">многослойных палет</strong> с
+            разделительными листами (slip-sheet) между слоями для устойчивости штабеля.
           </li>
           <li>
-            Экспорт готовой программы в KRL: editor генерирует движение, а программисту
+            Экспорт готовой программы в KRL: редактор генерирует движение, а программисту
             остаётся описать только Pick-from-Source.
           </li>
         </ul>
@@ -107,9 +108,9 @@ export default function Module7() {
             DeviceNet/EtherNet/IP, в каталоге WorkVisual.
           </li>
           <li>
-            Поддержка <strong className="text-foreground">torch cleaning station</strong>{' '}
-            (очистка торча от брызг), тросовой подачи проволоки и сенсорных функций
-            seam-tracking.
+            Поддержка <strong className="text-foreground">станции очистки сварочной горелки (torch cleaning station)</strong>{' '}
+            (очистка горелки от брызг), тросовой подачи проволоки и сенсорных функций
+            отслеживания шва (seam-tracking).
           </li>
         </ul>
       </motion.div>
@@ -119,15 +120,15 @@ export default function Module7() {
         <h2 className="text-xl font-semibold mb-4">VisionTech &mdash; 2D-машинное зрение</h2>
         <p className="text-muted-foreground leading-relaxed">
           <strong className="text-foreground">KUKA.VisionTech</strong> &mdash; пакет
-          2D-vision: камера (KUKA или сторонняя) плюс offline-калибровка плюс
-          runtime-распознавание. Результат работы пакета &mdash; координаты найденного
+          2D-машинного зрения (2D-vision): камера (KUKA или сторонняя) плюс offline-калибровка плюс
+          распознавание во время выполнения. Результат работы пакета &mdash; координаты найденного
           объекта в системе <strong className="text-foreground">BASE</strong> робота.
           Дальше робот использует эти координаты как обычную точку в LIN.
         </p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
-            Поддержка <strong className="text-foreground">2D-vision с auto-calibration</strong>:
-            мастер калибровки сам пересчитывает связь camera&nbsp;&rarr;&nbsp;BASE по
+            Поддержка <strong className="text-foreground">2D-машинного зрения с автокалибровкой (auto-calibration)</strong>:
+            мастер калибровки сам пересчитывает связь камера&nbsp;&rarr;&nbsp;BASE по
             калибровочной мишени.
           </li>
           <li>
@@ -135,8 +136,8 @@ export default function Module7() {
             и собственными KUKA, и сторонними промышленными.
           </li>
           <li>
-            Распознавание по <strong className="text-foreground">template matching</strong>{' '}
-            (по образцу) и <strong className="text-foreground">OCR</strong> (печатные
+            Распознавание по <strong className="text-foreground">поиску по образцу (template matching)</strong>{' '}
+            и <strong className="text-foreground">оптическому распознаванию символов (OCR)</strong> (печатные
             символы на детали).
           </li>
           <li>
@@ -153,7 +154,7 @@ export default function Module7() {
           <strong className="text-foreground">KUKA.mxAutomation</strong> &mdash; самый
           необычный пакет в линейке. Он позволяет программировать робота{' '}
           <strong className="text-foreground">из PLC</strong>, без написания KRL-программ.
-          KUKA поставляет блоки FB (Function Blocks) для контроллеров{' '}
+          KUKA поставляет функциональные блоки (Function Blocks, FB) для контроллеров{' '}
           <strong className="text-foreground">S7-1500 / S7-1200 / S7-300 / S7-400</strong>{' '}
           в среде <strong className="text-foreground">TIA Portal</strong>.
         </p>
@@ -174,12 +175,12 @@ export default function Module7() {
             текущего движения.
           </li>
           <li>
-            И ещё десятки FB на PTP, CIRC, IO, обработку фреймов и т.д.
+            И ещё десятки функциональных блоков на PTP, CIRC, IO, обработку фреймов и т.д.
           </li>
         </ul>
         <p className="text-muted-foreground leading-relaxed mt-4">
-          В этом сценарии <strong className="text-foreground">KRC работает как slave</strong>:
-          KRL-программа минимальна (только startup-handler, который запускает mxA-сервис),
+          В этом сценарии <strong className="text-foreground">KRC работает как подчинённое устройство (slave)</strong>:
+          KRL-программа минимальна (только обработчик запуска, который запускает mxA-сервис),
           а вся бизнес-логика живёт в TIA Portal Step&nbsp;7. Главное преимущество &mdash;
           программистам PLC <strong className="text-foreground">не нужно учить KRL</strong>;
           они работают в привычной для себя среде. Один S7 может управлять до пяти роботов
@@ -196,7 +197,7 @@ export default function Module7() {
             xmlns="http://www.w3.org/2000/svg"
             className="w-full h-auto"
             role="img"
-            aria-label="Матрица четырёх пакетов KUKA против четырёх задач: палеттирование, сварка, vision, интеграция через PLC. Зелёные точки — основная задача пакета, серые — пакет задачу не закрывает."
+            aria-label="Матрица четырёх пакетов KUKA против четырёх задач: палеттирование, сварка, машинное зрение, интеграция через PLC. Зелёные точки — основная задача пакета, серые — пакет задачу не закрывает."
           >
             {/* Заголовки колонок (задачи) */}
             <text x="190" y="30" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--foreground)">
@@ -206,7 +207,7 @@ export default function Module7() {
               Сварка
             </text>
             <text x="350" y="30" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--foreground)">
-              Vision
+              Машинное зрение
             </text>
             <text x="430" y="30" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--foreground)">
               PLC
@@ -266,10 +267,10 @@ export default function Module7() {
 
       <Takeaways
         items={[
-          'PalletTech — палеттирование без KRL-кода (graphical pallet editor в WorkVisual).',
+          'PalletTech — палеттирование без KRL-кода (графический редактор палет в WorkVisual).',
           'ArcTech — встроенные параметры сварки (WeldOn / WeldOff / Weave) в KRL-командах движения.',
           'VisionTech — 2D-распознавание; результат — координаты объекта в BASE.',
-          'mxAutomation — программирование робота из PLC (S7-1500 / 1200 / 300 / 400) через TIA Portal. Робот — slave.',
+          'mxAutomation — программирование робота из PLC (S7-1500 / 1200 / 300 / 400) через TIA Portal. Робот — подчинённое устройство (slave).',
         ]}
       />
 
@@ -292,7 +293,7 @@ export default function Module7() {
               text: 'mxAutomation',
               correct: true,
               explanation:
-                'mxAutomation предоставляет блоки FB для S7-1500/1200/300/400. Программирование выполняется в TIA Portal на стороне PLC. Робот — slave, исполняет команды.',
+                'mxAutomation предоставляет функциональные блоки (FB) для S7-1500/1200/300/400. Программирование выполняется в TIA Portal на стороне PLC. Робот — подчинённое устройство (slave), исполняет команды.',
             },
             {
               text: 'VisionTech',

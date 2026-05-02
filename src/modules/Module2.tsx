@@ -104,13 +104,14 @@ export default function Module2() {
             &mdash; читает резольверы осей и возвращает положение в Control PC.
           </li>
           <li>
-            <strong className="text-foreground">Safety-board ESC</strong> (Electronic
-            Safety Circuit) &mdash; обрабатывает e-stop, enabling switch, защитные
-            барьеры; сертифицирован по SIL&nbsp;3 / PLe.
+            <strong className="text-foreground">Плата безопасности ESC</strong>{' '}
+            <span className="text-muted-foreground/70">(Electronic Safety Circuit)</span>{' '}
+            &mdash; обрабатывает аварийный стоп, выключатель разрешения движения, защитные
+            барьеры; сертифицирована по SIL&nbsp;3&nbsp;/&nbsp;PLe.
           </li>
           <li>
-            <strong className="text-foreground">IO-модули</strong> и слоты под полевые
-            шины.
+            <strong className="text-foreground">Модули ввода-вывода (IO)</strong>{' '}
+            и слоты под полевые шины.
           </li>
         </ul>
       </motion.div>
@@ -147,23 +148,26 @@ export default function Module2() {
         </p>
         <ul className="text-muted-foreground leading-relaxed mt-3 space-y-2 list-disc pl-5">
           <li>
-            <strong className="text-foreground">Key switch</strong> &mdash;
-            ключ-переключатель режимов: <strong className="text-foreground">T1</strong>{' '}
+            <strong className="text-foreground">Ключ-переключатель режимов</strong>{' '}
+            <span className="text-muted-foreground/70">(key switch)</span>:{' '}
+            <strong className="text-foreground">T1</strong>{' '}
             (медленный ручной, до 250&nbsp;мм/с),{' '}
             <strong className="text-foreground">T2</strong> (быстрый ручной, для
-            проверки),
-            <strong className="text-foreground"> AUT</strong> (автоматический запуск
+            проверки),{' '}
+            <strong className="text-foreground">AUT</strong> (автоматический запуск
             программы), <strong className="text-foreground">EXT</strong> (внешнее
             управление от PLC).
           </li>
           <li>
-            <strong className="text-foreground">Enabling switch</strong> &mdash;
-            трёхпозиционный dead-man на задней стороне; движение возможно только в среднем
-            положении, отпустил или сжал &mdash; стоп.
+            <strong className="text-foreground">Выключатель разрешения движения</strong>{' '}
+            <span className="text-muted-foreground/70">(enabling switch)</span> &mdash;
+            трёхпозиционная кнопка-тумблер на задней стороне; движение возможно только
+            в среднем положении, отпустил или резко сжал &mdash; стоп.
           </li>
           <li>
-            <strong className="text-foreground">E-stop</strong> &mdash; красная грибовидная
-            кнопка аварийной остановки.
+            <strong className="text-foreground">Аварийный стоп</strong>{' '}
+            <span className="text-muted-foreground/70">(e-stop)</span> &mdash; красная
+            грибовидная кнопка аварийной остановки.
           </li>
         </ul>
       </motion.div>
@@ -376,7 +380,7 @@ export default function Module2() {
       <Takeaways
         items={[
           'KRC4 и KRC5 — два поколения шкафа, программно совместимы (KSS 8.7+); KRC5 компактнее.',
-          'SmartPAD — пульт оператора: ключ режимов (T1 / T2 / AUT / EXT) + enabling switch + e-stop.',
+          'SmartPAD — пульт оператора: ключ режимов (T1 / T2 / AUT / EXT) + выключатель разрешения движения (enabling switch) + аварийный стоп (e-stop).',
           'Полевые шины KUKA «из коробки»: PROFINET, EtherCAT, EtherNet/IP, ProfiBus, DeviceNet.',
         ]}
       />

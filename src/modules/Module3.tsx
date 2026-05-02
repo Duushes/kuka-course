@@ -30,8 +30,8 @@ export default function Module3() {
           У робота есть одна <em>главная</em> точка &mdash; кончик инструмента, которым он реально
           что-то делает: остриё сварочной горелки, центр захвата, кончик клеевого сопла или иглы
           диспенсера. Эту точку называют <strong className="text-foreground">TCP</strong> &mdash;
-          Tool Center Point. Любая программа движения KUKA по сути описывает траекторию TCP в
-          пространстве цеха.
+          Tool Center Point, центр инструмента. Любая программа движения KUKA по сути описывает
+          траекторию TCP в пространстве цеха.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Чтобы говорить о &laquo;положении TCP&raquo; внятно, KUKA вводит несколько систем
@@ -39,7 +39,7 @@ export default function Module3() {
           в&nbsp;точку&nbsp;P1&raquo; теряет смысл &mdash; непонятно, относительно чего эта P1
           задана. В&nbsp;модуле разберёмся в&nbsp;иерархии систем, в&nbsp;ритуалах калибровки
           (XYZ&nbsp;4-Point, ABC&nbsp;2-Point, BASE&nbsp;3-Point) и&nbsp;коротко &mdash; в&nbsp;прямой
-          и&nbsp;обратной кинематике.
+          и&nbsp;обратной задаче кинематики.
         </p>
       </motion.div>
 
@@ -239,7 +239,7 @@ export default function Module3() {
               TCP. Оператор подводит остриё инструмента в&nbsp;один и&nbsp;тот же физический
               репер (обычно острая &laquo;игла&raquo; на&nbsp;стенде) <em>четыре раза с&nbsp;разной
               ориентацией</em> манипулятора. KSS получает 4&nbsp;уравнения с&nbsp;тремя неизвестными
-              (XYZ TCP относительно фланца) и&nbsp;решает overdetermined систему методом наименьших
+              (XYZ TCP относительно фланца) и&nbsp;решает переопределённую систему методом наименьших
               квадратов. Результат &mdash; вектор TCP в&nbsp;координатах FLANGE.
             </p>
           </div>
@@ -277,7 +277,7 @@ export default function Module3() {
             {
               text: 'B) Один и тот же физический наконечник инструмента подводят в одну фиксированную точку с 4 разными ориентациями',
               correct: true,
-              explanation: 'Именно так. KSS из четырёх измерений в одной точке решает overdetermined систему наименьшими квадратами и получает XYZ TCP относительно фланца. ABC 2-Point добавляет ориентацию.',
+              explanation: 'Именно так. KSS из четырёх измерений в одной точке решает переопределённую систему методом наименьших квадратов и получает XYZ TCP относительно фланца. ABC 2-Point добавляет ориентацию.',
             },
             {
               text: 'C) TCP вычисляется автоматически из CAD-модели инструмента',
@@ -303,9 +303,9 @@ export default function Module3() {
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Делается с помощью прибора <strong className="text-foreground">EMD</strong>{' '}
-          (Electronic Mastering Device) или dial gauge: оператор подводит каждую ось в
-          mastering-position по эталонной риске, KSS запоминает её как ноль. Запускается
-          через <em>SmartPAD &rarr; Start-up &rarr; Master &rarr; EMD</em>.
+          (Electronic Mastering Device) или индикаторного щупа (dial gauge): оператор подводит
+          каждую ось в положение для юстировки (mastering-position) по эталонной риске, KSS
+          запоминает её как ноль. Запускается через <em>SmartPAD &rarr; Start-up &rarr; Master &rarr; EMD</em>.
         </p>
         <p className="text-muted-foreground leading-relaxed mt-4">
           Mastering нужен после: ввода в эксплуатацию, замены мотора, замены RDC, удара
@@ -321,27 +321,27 @@ export default function Module3() {
           'Иерархия систем: WORLD → ROBROOT → A1…A6 → FLANGE → TOOL (TCP). BASE — пользовательская система отсчёта от WORLD, удобная для привязки к заготовке.',
           'Калибровки: TCP — XYZ 4-Point + ABC 2-Point; BASE — 3-Point (origin + X + точка XY). Без калибровки координаты «уезжают».',
           'Mastering — привязка нулевых положений осей через EMD. Нужен после ввода в работу, замены мотора/RDC, удара. Без него вся кинематика неверна.',
-          'FK однозначна, IK имеет несколько решений; KUKA выбирает однозначно через status (S) и turn (T) в типе POS.',
+          'Прямая задача кинематики (FK) однозначна, обратная (IK) имеет несколько решений; KUKA выбирает однозначно через status (S) и turn (T) в типе POS.',
         ]}
       />
 
       {/* FK / IK */}
       <motion.div variants={fadeInItem} className="mb-10">
-        <h2 className="text-xl font-semibold mb-4">FK и IK на пальцах</h2>
+        <h2 className="text-xl font-semibold mb-4">Прямая и обратная задачи кинематики на пальцах</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
           Под капотом KSS работают два направления преобразований между &laquo;углами осей&raquo;
           и&nbsp;&laquo;положением TCP&raquo;.
         </p>
         <ul className="space-y-3 text-muted-foreground leading-relaxed">
           <li>
-            <strong className="text-foreground">Forward Kinematics (FK)</strong> &mdash;
-            прямая задача: известны углы шести осей &rarr; вычисляем положение и&nbsp;ориентацию
+            <strong className="text-foreground">Прямая задача кинематики (Forward Kinematics, FK)</strong> &mdash;
+            известны углы шести осей &rarr; вычисляем положение и&nbsp;ориентацию
             TCP в&nbsp;WORLD. Это последовательное умножение матриц по&nbsp;таблице
             Денавита-Хартенберга. Тригонометрия, замкнутая форма, всегда <em>одно</em> решение.
           </li>
           <li>
-            <strong className="text-foreground">Inverse Kinematics (IK)</strong> &mdash;
-            обратная задача: известно положение TCP &rarr; вычисляем углы. Решений
+            <strong className="text-foreground">Обратная задача кинематики (Inverse Kinematics, IK)</strong> &mdash;
+            известно положение TCP &rarr; вычисляем углы. Решений
             обычно <em>несколько</em>: кисть &laquo;вверх/вниз&raquo;, локоть
             &laquo;вперёд/назад&raquo;, развороты последней оси. KUKA выбирает однозначно через
             два дополнительных поля в&nbsp;типе <code className="text-accent">E6POS</code>:
@@ -390,8 +390,8 @@ export default function Module3() {
             Перекалибровать BASE проще, чем переписывать программу.
           </li>
           <li>
-            FK даёт TCP из&nbsp;углов однозначно; IK имеет несколько решений &mdash; KUKA
-            однозначно выбирает их через <code className="text-accent">status</code>
+            Прямая задача (FK) даёт TCP из&nbsp;углов однозначно; обратная задача (IK) имеет
+            несколько решений &mdash; KUKA однозначно выбирает их через <code className="text-accent">status</code>
             {' '}и&nbsp;<code className="text-accent">turn</code> в&nbsp;<code className="text-accent">E6POS</code>.
           </li>
         </ul>
